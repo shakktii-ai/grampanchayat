@@ -270,7 +270,7 @@ console.log(formData);
     
   <div className="grid md:grid-cols-2 md:gap-6">
     <div className="relative z-0 mx-10 md:w-full mb-5 group">
-        <input type="text" name="birthBabyFullName" id="birthBabyFullName" value={birthBabyFullName} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder=" "  />
+        <input type="text" name="birthBabyFullName" id="birthBabyFullName" value={birthBabyFullName} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder=" " required />
         <label htmlFor="birthBabyFullName" className="peer-focus:font-medium absolute text-sm text-white dark:text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">जन्मलेल्या व्यक्तीचे पूर्ण नाव:</label>
     </div>
     <div className="relative z-0 mx-10 md:w-full mb-5 group">
@@ -336,7 +336,23 @@ console.log(formData);
 
   <div className="grid md:grid-cols-2 md:gap-6">
     <div className="relative z-0 mx-10 md:w-full mb-5 group">
-        <input type="text" name="genderOfBaby" id="genderOfBaby" value={genderOfBaby} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder=" " required />
+        {/* <input type="text" name="genderOfBaby" id="genderOfBaby" value={genderOfBaby} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder=" " required /> */}
+
+        <select
+        name="genderOfBaby"
+        id="genderOfBaby"
+        value={genderOfBaby}
+        onChange={handleInputChange}
+        className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer"
+        required
+    >
+        <option value="" disabled selected>
+        लिंग:
+        </option>
+        <option className='text-black bg-' value="पुरुष">पुरुष</option>
+        <option className='text-black' value="महिला">महिला</option>
+        <option className='text-black' value="इतर">इतर</option>
+    </select>
         <label htmlFor="genderOfBaby" className="peer-focus:font-medium absolute text-sm text-white dark:text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">लिंग: पुरुष/स्त्री/इतर</label>
     </div>
     <div className="relative z-0 mx-10 md:w-full mb-5 group">
