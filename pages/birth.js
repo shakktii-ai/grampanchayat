@@ -122,34 +122,7 @@ function Birth() {
      
   };
 
-const formData = {
-  fullName,
-  address,
-  mobileNumber,
-  email,
-  birthBabyFullName,
-  fatherName,
-  motherName,
-  dateOfBirth,
-  timeOfBirth,
-  placeOfBirth,
-  nameOfHospital,
-  talOfHospital,
-  addressOfHospital,
-  cityOfHospital,
-  distOfHospital,
-  genderOfBaby,
-  birthRegNo,
-  additionalInfo,
-  hospitalCertificate,
-  parentId,
-  addressProof,
-  other,
-  signature,
-  status,
-  requestType
-};
-console.log(formData);
+
 
 
   // const handleSubmit = async (e) => {
@@ -214,12 +187,33 @@ console.log(formData);
     // console.log(response);
 
     console.log("Success:", data);
-    // setfullName("");
-    // setage("");
-    // setphoneNo("");
-    // setemail("");
-    // setaddress("");
-    // setmassage("");
+    setFullName("");
+    setAddress("");
+    setMobileNumber("");
+    setEmail("");
+    setBirthBabyFullName("");
+    setFatherName("");
+    setMotherName("");
+    setDateOfBirth("");
+    setTimeOfBirth("");
+    setPlaceOfBirth("");
+    setNameOfHospital("");
+    setCityOfHospital("");
+    setDistOfHospital("");
+    setGenderOfBaby("");
+    setBirthRegNo("");
+    setAdditionalInfo("");
+    setAddressOfHospital("");
+    setTalOfHospital("")
+    setHospitalCertificate(null);
+
+
+
+
+    
+    
+    
+    
     toast.success("Your Request Send Successfull", {
       position: "top-left",
       autoClose: 3000,
