@@ -211,7 +211,7 @@ console.log(formData);
     let response = await res.json();
     // console.log(response);
 
-    // console.log("Success:", data);
+    console.log("Success:", data);
     // setfullName("");
     // setage("");
     // setphoneNo("");
