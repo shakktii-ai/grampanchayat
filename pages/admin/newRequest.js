@@ -21,7 +21,7 @@ function NewRequest() {
   useEffect(() => {
     const fetchBirthCertificates = async () => {
       try {
-        const response = await fetch('/api/birth-certificate'); // Adjust the API endpoint
+        const response = await fetch('/api/birthCertificate'); // Adjust the API endpoint
         if (!response.ok) {
           throw new Error('Failed to fetch birth certificates');
         }

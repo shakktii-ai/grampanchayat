@@ -121,13 +121,104 @@ import BirthCertificate from '@/models/BirthCertificate';
 // }
 
 // import DbConnect from '@/middleware/dbConnect'; 
+
+
+
+
+
+
+// import mongoose from 'mongoose';
+//  // Adjust the path if necessary
+// import BirthCertificatee from '@/models/BirthCertificate'; // Adjust the path
+
+// const handler = async (req, res) => {
+//   if (!mongoose.connections[0].readyState) {
+//     await mongoose.connect(process.env.MONGODB_URI)
+//   } // Ensure DB is connected
+
+//   if (req.method === 'POST') {
+//     try {
+//       const {
+//         fullName,
+//         address,
+//         mobileNumber,
+//         email,
+//         birthBabyFullName,
+//         fatherName,
+//         motherName,
+//         dateOfBirth,
+//         timeOfBirth,
+//         placeOfBirth,
+//         nameOfHospital,
+//         talOfHospital,
+//         addressOfHospital,
+//         cityOfHospital,
+//         distOfHospital,
+//         genderOfBaby,
+//         birthRegNo,
+//         additionalInfo,
+//         hospitalCertificate,
+//         parentId,
+//         addressProof,
+//         other,
+//         signature,
+//         status,
+//         requestType
+//       } = req.body;
+
+//       // Create a new birth certificate instance with the received data
+//       const birthCertificate = new BirthCertificatee({
+//         fullName,
+//         address,
+//         mobileNumber,
+//         email,
+//         birthBabyFullName,
+//         fatherName,
+//         motherName,
+//         dateOfBirth,
+//         timeOfBirth,
+//         placeOfBirth,
+//         nameOfHospital,
+//         talOfHospital,
+//         addressOfHospital,
+//         cityOfHospital,
+//         distOfHospital,
+//         genderOfBaby,
+//         birthRegNo,
+//         additionalInfo,
+//         hospitalCertificate,
+//         parentId,
+//         addressProof,
+//         other,
+//         signature,
+//         status,
+//         requestType
+//       });
+
+//       // Save the birth certificate to the database
+//       await birthCertificate.save();
+
+//       // Send a success response
+//       res.status(200).json({ success: "Birth Certificate successfully created!" });
+//     } catch (error) {
+//       console.error("Error creating birth certificate:", error);
+//       res.status(500).json({ error: "Internal Server Error" });
+//     }
+//   } else {
+//     res.status(400).json({ error: "This method is not allowed" });
+//   }
+// }; 
+
+// export default handler;
+
+
 import mongoose from 'mongoose';
- // Adjust the path if necessary
+// Adjust the path if necessary
 import BirthCertificatee from '@/models/BirthCertificate'; // Adjust the path
 
 const handler = async (req, res) => {
   if (!mongoose.connections[0].readyState) {
-    await mongoose.connect(process.env.MONGODB_URI)
+    await mongoose.connect(process.env.MONGODB_URI);
   } // Ensure DB is connected
 
   if (req.method === 'POST') {
@@ -197,6 +288,15 @@ const handler = async (req, res) => {
     } catch (error) {
       console.error("Error creating birth certificate:", error);
       res.status(500).json({ error: "Internal Server Error" });
+    }
+  } else if (req.method === 'GET') {
+    try {
+      // Fetch birth certificates from the database
+      const birthCertificates = await BirthCertificatee.find();
+      res.status(200).json({ message: 'Birth certificates fetched successfully', data: birthCertificates });
+    } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ message: 'Internal server error' });
     }
   } else {
     res.status(400).json({ error: "This method is not allowed" });
