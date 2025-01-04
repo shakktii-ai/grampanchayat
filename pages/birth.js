@@ -160,8 +160,8 @@ console.log(formData);
       },
       body: JSON.stringify(formData),
     });
-
-    const result = await response.json();
+    // let response = await res.json();
+    let result = await response.json();
     if (response.ok) {
       alert('Form submitted successfully');
     } else {

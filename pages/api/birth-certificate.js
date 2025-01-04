@@ -120,11 +120,15 @@ import BirthCertificate from '@/models/BirthCertificate';
 //   }
 // }
 
-import DbConnect from '@/middleware/dbConnect';  // Adjust the path if necessary
+// import DbConnect from '@/middleware/dbConnect'; 
+import mongoose from 'mongoose';
+ // Adjust the path if necessary
 import BirthCertificatee from '@/models/BirthCertificate'; // Adjust the path
 
 const handler = async (req, res) => {
-  await DbConnect(); // Ensure DB is connected
+  if (!mongoose.connections[0].readyState) {
+    await mongoose.connect(process.env.MONGODB_URI)
+  } // Ensure DB is connected
 
   if (req.method === 'POST') {
     try {
