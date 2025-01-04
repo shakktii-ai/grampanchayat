@@ -71,8 +71,8 @@
 // }
 
 
-import dbConnect from '../../middleware/dbConnect';  // Helper function to connect to MongoDB
-import BirthCertificate from '../../models/BirthCertificate';
+import dbConnect from '@/middleware/dbConnect';  // Helper function to connect to MongoDB
+import BirthCertificate from '@/models/BirthCertificate';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
