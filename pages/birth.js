@@ -150,25 +150,85 @@ const formData = {
 console.log(formData);
 
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+    
+  //   const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/birthCertificate`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(formData),
+  //   });
+  //   // let response = await res.json();
+  //   let result = await response.json();
+  //   if (response.ok) {
+  //     alert('Form submitted successfully');
+  //   } else {
+  //     alert('Error: ' + result.message);
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/birthCertificate`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
-    // let response = await res.json();
-    let result = await response.json();
-    if (response.ok) {
-      alert('Form submitted successfully');
-    } else {
-      alert('Error: ' + result.message);
-    }
-  };
+    // console.log(phone,age, name, email, massage)
+    const data = { fullName,
+      address,
+      mobileNumber,
+      email,
+      birthBabyFullName,
+      fatherName,
+      motherName,
+      dateOfBirth,
+      timeOfBirth,
+      placeOfBirth,
+      nameOfHospital,
+      talOfHospital,
+      addressOfHospital,
+      cityOfHospital,
+      distOfHospital,
+      genderOfBaby,
+      birthRegNo,
+      additionalInfo,
+      hospitalCertificate,
+      parentId,
+      addressProof,
+      other,
+      signature,
+      status,
+      requestType };
 
+    let res = await fetch(
+      `${process.env.NEXT_PUBLIC_HOST}/api/birthCertificate`,
+      {
+        method: "POST", // or 'PUT'
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
+    let response = await res.json();
+    // console.log(response);
+
+    // console.log("Success:", data);
+    // setfullName("");
+    // setage("");
+    // setphoneNo("");
+    // setemail("");
+    // setaddress("");
+    // setmassage("");
+    // toast.success("Your Appointment Request Send Successfull", {
+    //   position: "top-left",
+    //   autoClose: 3000,
+    //   hideProgressBar: false,
+    //   closeOnClick: true,
+    //   pauseOnHover: true,
+    //   draggable: true,
+    //   progress: undefined,
+    //   theme: "light",
+    // });
+  };
   return (
     <>
     
