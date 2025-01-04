@@ -153,7 +153,7 @@ console.log(formData);
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/birth-certificate`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/birthCertificate`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
