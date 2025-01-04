@@ -1,5 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Birth() {
 
@@ -218,20 +220,31 @@ console.log(formData);
     // setemail("");
     // setaddress("");
     // setmassage("");
-    // toast.success("Your Appointment Request Send Successfull", {
-    //   position: "top-left",
-    //   autoClose: 3000,
-    //   hideProgressBar: false,
-    //   closeOnClick: true,
-    //   pauseOnHover: true,
-    //   draggable: true,
-    //   progress: undefined,
-    //   theme: "light",
-    // });
+    toast.success("Your Request Send Successfull", {
+      position: "top-left",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   };
   return (
     <>
-    
+    <ToastContainer
+        position="top-left"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
 
 <h1 className='text-2xl text-center m-auto mb-5 text-white font-bold'>जन्म प्रमाणपत्र अर्ज  (Birth Certificate Application Form)</h1>
 <form className="max-w-2xl m-auto " onSubmit={handleSubmit} >
