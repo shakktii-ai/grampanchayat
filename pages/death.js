@@ -73,29 +73,29 @@ function Death() {
            
         };
       
-      const formData = {
-        fullName,
-        mobileNumber,
-        email,
-        address,
-        deathFullName,
-        deathDateOfBirth,
-        deathDateOfDeath,
-        deathGender,
-        placeOfDeath,
-        deathRegistrationNumber,
-        deathAadhaarCard,
-        addressProof,
-        other, 
-        status,
-        requestType
-      };
-      console.log("formData in marriage",formData);
+      
+      // console.log("formData in marriage",formData);
       
       
         const handleSubmit = async (e) => {
           e.preventDefault();
-          
+          const formData = {
+            fullName,
+            mobileNumber,
+            email,
+            address,
+            deathFullName,
+            deathDateOfBirth,
+            deathDateOfDeath,
+            deathGender,
+            placeOfDeath,
+            deathRegistrationNumber,
+            deathAadhaarCard,
+            addressProof,
+            other, 
+            status,
+            requestType
+          };
           const response = await fetch('/api/death-certificate', {
             method: 'POST',
             headers: {
@@ -209,7 +209,7 @@ function Death() {
   
   <div className="relative z-0 mx-10 md:w-full mb-5 group">
   <label class="block mb-2 text-sm font-medium text-white dark:text-gray-300" htmlFor="file_input">आधार कार्ड / ओळखपत्र</label>
-<input name='deathAadhaarCard' accept="image/*" onChange={handleInputChange} class="block w-full text-sm text-gray-900 border border-gray-300  cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file" />
+<input name='deathAadhaarCard' accept="image/*" onChange={handleInputChange} class="block w-full text-sm text-gray-900 border border-gray-300  cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file" required/>
 <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>
 </div>
  
@@ -218,7 +218,7 @@ function Death() {
   <div className="grid md:grid-cols-2 md:gap-6"> */}
   <div className="relative z-0 mx-10 md:w-full mb-5 group">
   <label class="block mb-2 text-sm font-medium text-white dark:text-gray-300" htmlFor="file_input">पत्त्याचा पुरावा (रेशन कार्ड, लाईट बिल इ.)</label>
-<input name='addressProof' accept="image/*" onChange={handleInputChange} class="block w-full text-sm text-gray-900 border border-gray-300  cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file" />
+<input name='addressProof' accept="image/*" onChange={handleInputChange} class="block w-full text-sm text-gray-900 border border-gray-300  cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file" required />
 <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>
 </div>  
    
@@ -226,7 +226,7 @@ function Death() {
 
   <div className="relative z-0 mx-10 md:w-full mb-5 group">
   <label class="block mb-2 text-sm font-medium text-white dark:text-gray-300" htmlFor="file_input">इतर (जसे की शवविच्छेदन अहवाल, असेल तर)</label>
-<input name='other' accept="image/*" onChange={handleInputChange} class="block w-full text-sm text-gray-900 border border-gray-300  cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file" />
+<input name='other' accept="image/*" onChange={handleInputChange} class="block w-full text-sm text-gray-900 border border-gray-300  cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file" required />
 <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>
 </div>
   
