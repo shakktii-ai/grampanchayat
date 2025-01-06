@@ -1,12 +1,14 @@
 import React from 'react'
 import { useState } from 'react'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function RoadRepair() {
   const [fullName, setFullName] = useState('');
   const [address, setAddress] = useState('');
   const [mobileNumber, setMobileNumber] = useState('');
   const [email, setEmail] = useState('');
-  const [roadNameOrPlaceName, setRoadNameOrPlaceNamel] = useState('');
+  const [roadNameOrPlaceName, setRoadNameOrPlaceName] = useState('');
   const [area, setArea] = useState('');
   const [problemOfRoad, setProblemOfRoad] = useState('');
   const [sizeOfProblem, setSizeOfProblem] = useState('');
@@ -18,7 +20,23 @@ function RoadRepair() {
   const [status,setStatus ]=useState('सुरू केलेले नाही')
   const [requestType,setRequestType]=useState('रस्त्यांची तात्पुरती दुरुस्ती')
   
-
+  const getCurrentLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setCurrentLocation({ latitude, longitude });
+          setLocationMap(`https://maps.google.com/?q=${latitude},${longitude}`); // You can set this URL to show on Google Maps
+        },  
+        (error) => {
+          console.error('Error getting location:', error);
+          alert('Unable to retrieve your location.');
+        }
+      );
+    } else {
+      alert('Geolocation is not supported by this browser.');
+    }
+  };
 
   const handleInputChange = (e) => {
     
@@ -33,7 +51,7 @@ function RoadRepair() {
     } else if (e.target.name == "email") {  
       setEmail(e.target.value);
     } else if (e.target.name == "roadNameOrPlaceName") {
-      setRoadNameOrPlaceNamel(e.target.value);
+      setRoadNameOrPlaceName(e.target.value);
     } else if (e.target.name == "area") {
       setArea(e.target.value);
     } else if (e.target.name == "problemOfRoad") {
@@ -57,28 +75,28 @@ function RoadRepair() {
      
   };
 
-const formData = {
-  fullName,
-  address,
-  mobileNumber,
-  email,
-  roadNameOrPlaceName,
-  area,
-  problemOfRoad,
-  sizeOfProblem,
-  locationMap,  
-  problemExisted,
-  timeOfProblem,
-  problemImage,
-  status,
-  requestType
-};
-console.log(formData);
+
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+    const formData = {
+      fullName,
+      address,
+      mobileNumber,
+      email,
+      roadNameOrPlaceName,
+      area,
+      problemOfRoad,
+      sizeOfProblem,
+      locationMap,  
+      problemExisted,
+      timeOfProblem,
+      problemImage,
+      status,
+      requestType
+    };
+    // console.log(formData);
     const response = await fetch('/api/roadRepair-certificate', {
       method: 'POST',
       headers: {
@@ -88,31 +106,50 @@ console.log(formData);
     });
 
     const result = await response.json();
+    setAddress("")
+    setMobileNumber("")
+    setEmail("")
+    setRoadNameOrPlaceName("")
+    setArea("")
+    setProblemOfRoad("")
+    setSizeOfProblem("")
+    setLocationMap("")
+    setProblemExisted("")
+    setTimeOfProblem("")
+    setProblemImage(null)
+    
+
     if (response.ok) {
-      alert('Form submitted successfully');
+      toast.success("Your Request Send Successfull", {
+                 position: "top-left",
+                 autoClose: 3000,
+                 hideProgressBar: false,
+                 closeOnClick: true,
+                 pauseOnHover: true,
+                 draggable: true,
+                 progress: undefined,
+                 theme: "light",
+               });
+      // alert('Form submitted successfully');
     } else {
       alert('Error: ' + result.message);
     }
   };
-  const getCurrentLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setCurrentLocation({ latitude, longitude });
-          setLocationMap(`https://maps.google.com/?q=${latitude},${longitude}`); // You can set this URL to show on Google Maps
-        },  
-        (error) => {
-          console.error('Error getting location:', error);
-          alert('Unable to retrieve your location.');
-        }
-      );
-    } else {
-      alert('Geolocation is not supported by this browser.');
-    }
-  };
+  
   return (
     <>
+    <ToastContainer
+            position="top-left"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
      <h1 className='text-2xl text-center m-auto mb-5 text-white font-bold'>रस्त्यांची तात्पुरती दुरुस्ती सेवा फॉर्म(Temporary Road Repair. Application Form)</h1>
     <h1 className='text-xl text-center m-auto mb-5 text-white font-bold'>अर्जदाराची माहिती</h1>
 <form className="max-w-2xl m-auto " onSubmit={handleSubmit} >

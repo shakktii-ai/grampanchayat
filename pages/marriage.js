@@ -1,5 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Marriage() {
     const [husbandFullName,setHusbandFullName]=useState('')
@@ -102,32 +104,32 @@ function Marriage() {
        
     };
   
-  const formData = {
-    husbandFullName,
-    wifeFullName,
-    husbandDateOfBirth,
-    wifeDateOfBirth,
-    marriageDate,
-    marriagePlace,
-    marriageType,
-    husbandContactNumber,
-    wifeContactNumber,
-    email,
-    husbandAadhaarCard,
-    wifeAadhaarCard,
-    addressProof,
-    marriageProof,
-    firstWitnessesProof,
-    secondWitnessesProof,  
-    status,
-    requestType
-  };
-  console.log("formData in marriage",formData);
+  
   
   
     const handleSubmit = async (e) => {
       e.preventDefault();
-      
+      const formData = {
+        husbandFullName,
+        wifeFullName,
+        husbandDateOfBirth,
+        wifeDateOfBirth,
+        marriageDate,
+        marriagePlace,
+        marriageType,
+        husbandContactNumber,
+        wifeContactNumber,
+        email,
+        husbandAadhaarCard,
+        wifeAadhaarCard,
+        addressProof,
+        marriageProof,
+        firstWitnessesProof,
+        secondWitnessesProof,  
+        status,
+        requestType
+      };
+      // console.log("formData in marriage",formData);
       const response = await fetch('/api/marriage-certificate', {
         method: 'POST',
         headers: {
@@ -137,8 +139,36 @@ function Marriage() {
       });
   
       const result = await response.json();
+      setHusbandFullName("");
+      setWifeFullName("");
+      setHusbandDateOfBirth("");
+      setWifeDateOfBirth("");
+      setMarriageDate("");
+      setMarriagePlace("");
+      setMarriageType("");
+      setHusbandContactNumber("");
+      setWifeContactNumber("")
+      setEmail("");
+      setHusbandAadhaarCard(null)
+      setWifeAadhaarCard(null)
+      setAddressProof(null)
+      setMarriageProof(null)
+      setFirstWitnessesProof(null)
+      setSecondWitnessesProof(null)
+
+
       if (response.ok) {
-        alert('Form submitted successfully');
+        toast.success("Your Request Send Successfull", {
+           position: "top-left",
+           autoClose: 3000,
+           hideProgressBar: false,
+           closeOnClick: true,
+           pauseOnHover: true,
+           draggable: true,
+           progress: undefined,
+           theme: "light",
+         });
+        // alert('Form submitted successfully');
       } else {
         alert('Error: ' + result.message);
       }
@@ -146,6 +176,18 @@ function Marriage() {
   
   return (
     <>
+    <ToastContainer
+            position="top-left"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
     <h1 className='text-2xl text-center m-auto mb-5 text-white font-bold'>विवाह प्रमाणपत्र अर्ज फॉर्म (Marriage Certificate Application Form)</h1>
     <h1 className='text-xl text-center m-auto mb-5 text-white font-bold'>अर्जदाराची माहिती</h1>
 <form className="max-w-2xl m-auto " onSubmit={handleSubmit} >

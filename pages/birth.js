@@ -186,7 +186,7 @@ function Birth() {
     let response = await res.json();
     // console.log(response);
 
-    console.log("Success:", data);
+    // console.log("Success:", data);
     setFullName("");
     setAddress("");
     setMobileNumber("");
@@ -212,7 +212,7 @@ function Birth() {
 
     
     
-    
+    if (response.ok) {
     
     toast.success("Your Request Send Successfull", {
       position: "top-left",
@@ -224,6 +224,9 @@ function Birth() {
       progress: undefined,
       theme: "light",
     });
+  }else {
+    alert('Error: ' + result.message);
+  }
   };
   return (
     <>

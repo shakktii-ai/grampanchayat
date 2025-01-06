@@ -1,6 +1,9 @@
 import React from 'react'
 import { useState } from 'react'
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function Residence() {
   const [fullName,setFullName]=useState('')
       const [fatherOrWifeFullName,setFatherOrWifeFullName]=useState('')
@@ -73,29 +76,29 @@ function Residence() {
          
       };
     
-    const formData = {
-      fullName,
-      fatherOrWifeFullName,
-      dateOfBirth,
-      gender,
-      aadharNumber,
-      permanentAddress,
-      currentAddress,
-      durationOfResidence,
-      mobileNumber,
-      email,
-      aadhaarCard,
-      schoolOrCollegeCertificate,
-      addressProof, 
-      status,
-      requestType
-    };
-    console.log("formData in marriage",formData);
+    
     
     
       const handleSubmit = async (e) => {
         e.preventDefault();
-        
+        const formData = {
+          fullName,
+          fatherOrWifeFullName,
+          dateOfBirth,
+          gender,
+          aadharNumber,
+          permanentAddress,
+          currentAddress,
+          durationOfResidence,
+          mobileNumber,
+          email,
+          aadhaarCard,
+          schoolOrCollegeCertificate,
+          addressProof, 
+          status,
+          requestType
+        };
+        // console.log("formData in marriage",formData);
         const response = await fetch('/api/residence-certificate', {
           method: 'POST',
           headers: {
@@ -105,7 +108,32 @@ function Residence() {
         });
     
         const result = await response.json();
+        setFullName("");
+        setFatherOrWifeFullName("");
+        setDateOfBirth("");
+        setGender("");
+        setAadharNumber("");
+        setPermanentAddress("");
+        setCurrentAddress("");
+        setDurationOfResidence("");
+        setMobileNumber("");
+        setEmail("");
+        setAadhaarCard(null);
+        setSchoolOrCollegeCertificate(null);
+        setAddressProof(null);
+        
+
         if (response.ok) {
+toast.success("Your Request Send Successfull", {
+           position: "top-left",
+           autoClose: 3000,
+           hideProgressBar: false,
+           closeOnClick: true,
+           pauseOnHover: true,
+           draggable: true,
+           progress: undefined,
+           theme: "light",
+         });
           alert('Form submitted successfully');
         } else {
           alert('Error: ' + result.message);
@@ -113,6 +141,18 @@ function Residence() {
       };
   return (
     <>
+    <ToastContainer
+            position="top-left"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
      <h1 className='text-2xl text-center m-auto mb-5 text-white font-bold'>रहिवासी दाखला अर्ज फॉर्म(Residential Certificate Application Form)</h1>
     <h1 className='text-xl text-center m-auto mb-5 text-white font-bold'>अर्जदाराची माहिती</h1>
 <form className="max-w-2xl m-auto " onSubmit={handleSubmit} >

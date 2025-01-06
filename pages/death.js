@@ -1,6 +1,9 @@
 import React from 'react'
 import { useState } from 'react'
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function Death() {
    const [fullName,setFullName]=useState('')
    const [mobileNumber,setMobileNumber]=useState('')
@@ -105,14 +108,49 @@ function Death() {
           });
       
           const result = await response.json();
+          setFullName("");
+          setMobileNumber("");
+          setEmail("");
+          setAddress("");
+          setDeathFullName("");
+          setDeathDateOfBirth("");
+          setDeathDateOfDeath("");
+          setDeathGender("");
+          setPlaceOfDeath("");
+          setDeathRegistrationNumber("")
+          setDeathAadhaarCard(null);
+          setAddressProof(null);
+          setOther(null)
           if (response.ok) {
-            alert('Form submitted successfully');
+            toast.success("Your Request Send Successfull", {
+                  position: "top-left",
+                  autoClose: 3000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "light",
+                });
+            // alert('Form submitted successfully');
           } else {
             alert('Error: ' + result.message);
           }
         };
   return (
     <>
+    <ToastContainer
+        position="top-left"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
      <h1 className='text-2xl text-center m-auto mb-5 text-white font-bold'>मृत्यू प्रमाणपत्र अर्ज फॉर्म(Death Certificate Application Form)</h1>
     <h1 className='text-xl text-center m-auto mb-5 text-white font-bold'>अर्जदाराची माहिती</h1>
 <form className="max-w-2xl m-auto " onSubmit={handleSubmit} >

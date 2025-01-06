@@ -215,7 +215,7 @@ function NewRequest() {
       {isModalOpen && (
         // components/BirthCertificateForm.js
 
-    <div className="fixed inset-0 bg-white bg-opacity-100 mx-auto p-8 border rounded-md shadow-lg z-40 grid grid-cols-1 gap-8">
+    <div className=" fixed inset-0 mt-40 bg-white bg-opacity-100   p-8 border rounded-md shadow-lg lg:ml-80 grid grid-cols-1 gap-8">
   <h1 className="text-3xl font-bold text-center text-gray-800 ">
     जन्म प्रमाणपत्र अर्ज फॉर्म
   </h1>

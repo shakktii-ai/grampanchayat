@@ -1,111 +1,161 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 
 function BudgetInformation() {
-  const [collection,setCollection]=useState('')
-  const [expense,setExpense]=useState('')
-  const [financialYear,setFinancialYear]=useState('')
-  const [fundName,setFundName]=useState('')
-  const [accountGroup,setAccountGroup]=useState('')
-  const [accountName,setAccountName]=useState('')
-  const [actualAmountReceivedDuringYear,setActualAmountReceivedDuringYear]=useState('')
-  const [actualAmountReceivedYear,setActualAmountReceivedYear]=useState('')
-  const [estimatedAmountSanctionedYear,setEstimatedAmountSanctionedYear]=useState('')
-  const [estimatedReceiptsPanchayatYear,setEstimatedReceiptsPanchayatYear]=useState('')
-  const [openingBalanceYear,setOpeningBalanceYear]=useState('')
-  const [totalEstimatedDeposit,setTotalEstimatedDeposit]=useState('')
-  const [totalEstimatedCost,setTotalEstimatedCost]=useState('')
-  const [aVBackwardClasses15,setAVBackwardClasses15]=useState('')
-  const [dVDFSubscription025,setDVDFSubscription025]=useState('')
-  const [disabilityWelfareFund5,setDisabilityWelfareFund5]=useState('')
-  const [mChildWelfare10,setMChildWelfare10]=useState('')
+  const [collection, setCollection] = useState('')
+  const [expense, setExpense] = useState('')
+  const [financialYear, setFinancialYear] = useState('')
+  const [fundName, setFundName] = useState('')
+  const [accountGroup, setAccountGroup] = useState('')
+  const [accountName, setAccountName] = useState('')
+  const [actualAmountReceivedDuringYear, setActualAmountReceivedDuringYear] = useState('')
+  const [actualAmountReceivedYear, setActualAmountReceivedYear] = useState('')
+  const [estimatedAmountSanctionedYear, setEstimatedAmountSanctionedYear] = useState('')
+  const [estimatedReceiptsPanchayatYear, setEstimatedReceiptsPanchayatYear] = useState('')
+  const [openingBalanceYear, setOpeningBalanceYear] = useState('')
+  const [totalEstimatedDeposit, setTotalEstimatedDeposit] = useState('')
+  const [totalEstimatedCost, setTotalEstimatedCost] = useState('')
+  const [aVBackwardClasses15, setAVBackwardClasses15] = useState('')
+  const [dVDFSubscription025, setDVDFSubscription025] = useState('')
+  const [disabilityWelfareFund5, setDisabilityWelfareFund5] = useState('')
+  const [mChildWelfare10, setMChildWelfare10] = useState('')
 
-     
-          
-        
-        
-          const handleInputChange = (e) => {
-            const { name, value } = e.target;
 
-            if (name === 'collection') {
-              setCollection(value);
-              setExpense(''); // Reset expense when collection is selected
-            } else if (name === 'expense') {
-              setExpense(value);
-              setCollection('');
-            } else if (e.target.name == "financialYear") {
-              setFinancialYear(e.target.value);
-            } else if (e.target.name == "fundName") {  
-              setFundName(e.target.value);
-            } else if (e.target.name == "accountGroup") {  
-              setAccountGroup(e.target.value);
-            } else if (e.target.name == "accountName") {
-              setAccountName(e.target.value);
-            } else if (e.target.name == "actualAmountReceivedDuringYear") {
-              setActualAmountReceivedDuringYear(e.target.value);
-            } else if (e.target.name == "actualAmountReceivedYear") {
-              setActualAmountReceivedYear(e.target.value);
-            } else if (e.target.name == "estimatedAmountSanctionedYear") {
-              setEstimatedAmountSanctionedYear(e.target.value);
-            } else if (e.target.name == "estimatedReceiptsPanchayatYear") {
-              setEstimatedReceiptsPanchayatYear(e.target.value);
-            } else if (e.target.name == "openingBalanceYear") {
-              setOpeningBalanceYear(e.target.value);
-            } else if (e.target.name == "totalEstimatedDeposit") {
-              setTotalEstimatedDeposit(e.target.value);
-            } else if (e.target.name == "totalEstimatedCost") {
-              setTotalEstimatedCost(e.target.value);
-            } else if (e.target.name == "aVBackwardClasses15") {
-              setAVBackwardClasses15(e.target.value);
-            } else if (e.target.name == "dVDFSubscription025") {
-              setDVDFSubscription025(e.target.value);
-            } else if (e.target.name == "disabilityWelfareFund5") {
-              setDisabilityWelfareFund5(e.target.value);
-            } else if (e.target.name == "mChildWelfare10") {
-              setMChildWelfare10(e.target.value);
-            }     
-             
-          };
-        
-        const formData = {
-          collection,
-          expense,
-          financialYear,
-          fundName,
-          accountGroup,
-          accountName,
-          actualAmountReceivedDuringYear,
-          actualAmountReceivedYear,
-          estimatedAmountSanctionedYear,
-          estimatedReceiptsPanchayatYear,
-          openingBalanceYear,
-          totalEstimatedDeposit,
-          totalEstimatedCost,
-          aVBackwardClasses15,
-          dVDFSubscription025,
-          disabilityWelfareFund5,
-          mChildWelfare10,
-        };
-        console.log("formData ",formData);
-        
-        
-          const handleSubmit = async (e) => {
-            e.preventDefault();
-            
-            const response = await fetch('/api/namunaOne', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(formData),
-            });
-        
-            const result = await response.json();
-            if (response.ok) {
-              alert('Form submitted successfully');
-            } else {
-              alert('Error: ' + result.message);
-            }
-          };
+  const accountOptions = {
+    'एक (अ) कर': [
+      'मालमत्ता कर, जमिनी व इमारती यावरील कर',
+      'दिवाबत्ती कर',
+      'स्वच्छता कर',
+      'दुकाने, लघु उद्योग व हॉटेल चालविणे यावरील कर',
+      'यात्रा कर',
+      'जत्रा, उत्सव व इतर मनोरंजन कर',
+      'सायकल व इतर वाहनावरील कर',
+      'टोल टॅक्स',
+      'उतारू व मालावरील कर',
+      'वन विकास कर',
+      'सेवा कर',
+      'व्यापारी किंवा आजिवीका यावरील कर (शेतीव्यतिरिक्त)',
+      'गुरांच्या बाजारातील दलालीचा व्यवसाय व आजिवीकेवरील कर',
+      'इतर कर',
+    ],
+    'एक (ब) करेत्तर उत्पन्न': [
+      'बाजार फी',
+      'टांगा स्टॅण्ड फी',
+      'कार स्टॅण्ड फी',
+      'पाणी पट्टी',
+      'स्वच्छता फी',
+      'गाय चरण फी',
+      'डीव्हीडीएफ व्याज २.५%',
+      'जमीन भाडेपट्टी',
+      'व्याज जमा',
+      'जागा भाडे',
+      'कोंडवाडा जमा',
+      'देणगी',
+      'इतर जमा',
+    ],
+    'एक (क)अभिहस्तांकित रक्कमा':[
+      'मुद्रांक शुल्क',
+      'उपकर',
+      'जमीन महसूल',
+      'जमीन समानीकरण',
+      'गौण खनिजे',
+      'पथ दिवाबत्ती देयकाचा भरणा करण्यासाठी अनुदान.',
+      'नळपाणी पुरवठ्यातील देयकासाठी ५०% अनुदाने.',
+      'मागास व आदिवासी क्षेत्रासाठी सहाय्य.',
+      'यात्राकराऐवजी अनुदाने',
+      'जकात नुकसानभरपाई अनुदाने',
+      'इतर अनुदाने',
+
+    ],
+    'दोन) (अ) राज्य शासन सहाय्यक':[
+      
+    ],
+  };
+
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === 'collection') {
+      setCollection(value);
+      setExpense(''); // Reset expense when collection is selected
+    } else if (name === 'expense') {
+      setExpense(value);
+      setCollection('');
+    } else if (e.target.name == "financialYear") {
+      setFinancialYear(e.target.value);
+    } else if (e.target.name == "fundName") {
+      setFundName(e.target.value);
+    } else if (e.target.name == "accountGroup") {
+      setAccountGroup(e.target.value);
+      setAccountName('');
+    } else if (e.target.name == "accountName") {
+      setAccountName(e.target.value);
+    } else if (e.target.name == "actualAmountReceivedDuringYear") {
+      setActualAmountReceivedDuringYear(e.target.value);
+    } else if (e.target.name == "actualAmountReceivedYear") {
+      setActualAmountReceivedYear(e.target.value);
+    } else if (e.target.name == "estimatedAmountSanctionedYear") {
+      setEstimatedAmountSanctionedYear(e.target.value);
+    } else if (e.target.name == "estimatedReceiptsPanchayatYear") {
+      setEstimatedReceiptsPanchayatYear(e.target.value);
+    } else if (e.target.name == "openingBalanceYear") {
+      setOpeningBalanceYear(e.target.value);
+    } else if (e.target.name == "totalEstimatedDeposit") {
+      setTotalEstimatedDeposit(e.target.value);
+    } else if (e.target.name == "totalEstimatedCost") {
+      setTotalEstimatedCost(e.target.value);
+    } else if (e.target.name == "aVBackwardClasses15") {
+      setAVBackwardClasses15(e.target.value);
+    } else if (e.target.name == "dVDFSubscription025") {
+      setDVDFSubscription025(e.target.value);
+    } else if (e.target.name == "disabilityWelfareFund5") {
+      setDisabilityWelfareFund5(e.target.value);
+    } else if (e.target.name == "mChildWelfare10") {
+      setMChildWelfare10(e.target.value);
+    }
+
+  };
+
+
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = {
+      collection,
+      expense,
+      financialYear,
+      fundName,
+      accountGroup,
+      accountName,
+      actualAmountReceivedDuringYear,
+      actualAmountReceivedYear,
+      estimatedAmountSanctionedYear,
+      estimatedReceiptsPanchayatYear,
+      openingBalanceYear,
+      totalEstimatedDeposit,
+      totalEstimatedCost,
+      aVBackwardClasses15,
+      dVDFSubscription025,
+      disabilityWelfareFund5,
+      mChildWelfare10,
+    };
+    console.log("formData ", formData);
+    const response = await fetch('/api/namunaOne', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const result = await response.json();
+    if (response.ok) {
+      alert('Form submitted successfully');
+    } else {
+      alert('Error: ' + result.message);
+    }
+  };
   return (
     <>
       <div className="min-h-screen bg-transparent flex items-center lg:-m-11 justify-center lg:mr-3">
@@ -116,38 +166,38 @@ function BudgetInformation() {
           <form className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" onSubmit={handleSubmit}>
             {/* Row 1 */}
             <div className="  flex items-center space-x-4">
-  {/* Radio for खर्च */}
- 
+              {/* Radio for खर्च */}
 
-  {/* Radio for जमा */}
 
-  <div className="w-full border border-gray-300 rounded-md p-2 mt-6 flex gap-7 justify-center bg-white">
-              <div className="flex items-center space-x-2">
-                <input
-                  type="radio"
-                  id="collection"
-                  value="collection"
-                  name="collection"
-                  checked={collection === 'collection'}
-                  onChange={handleInputChange}
-                  className="focus:ring-green-500 focus:border-green-500"
-                />
-                <label htmlFor="collection" className="text-sm font-medium">जमा</label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <input
-                  type="radio"
-                  id="expense"
-                  value="expense"
-                  name="expense"
-                  checked={expense === 'expense'}
-                  onChange={handleInputChange}
-                  className="focus:ring-green-500 focus:border-green-500"
-                />
-                <label htmlFor="kharch" className="text-sm font-medium">खर्च</label>
+              {/* Radio for जमा */}
+
+              <div className="w-full border border-gray-300 rounded-md p-2 mt-6 flex gap-7 justify-center bg-white">
+                <div className="flex items-center space-x-2">
+                  <input
+                    type="radio"
+                    id="collection"
+                    value="collection"
+                    name="collection"
+                    checked={collection === 'collection'}
+                    onChange={handleInputChange}
+                    className="focus:ring-green-500 focus:border-green-500"
+                  />
+                  <label htmlFor="collection" className="text-sm font-medium">जमा</label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <input
+                    type="radio"
+                    id="expense"
+                    value="expense"
+                    name="expense"
+                    checked={expense === 'expense'}
+                    onChange={handleInputChange}
+                    className="focus:ring-green-500 focus:border-green-500"
+                  />
+                  <label htmlFor="kharch" className="text-sm font-medium">खर्च</label>
+                </div>
               </div>
             </div>
-          </div>
 
 
             <div>
@@ -170,13 +220,13 @@ function BudgetInformation() {
             </div>
 
             {/* Row 2 */}
-           
+
             <div>
-              <label  className="block text-sm font-medium text-white mb-1"><label className='text-red-500'>*</label>खाते गट</label>
+              <label className="block text-sm font-medium text-white mb-1"><label className='text-red-500'>*</label>खाते गट</label>
               <select name='accountGroup' onChange={handleInputChange} value={accountGroup} className="w-full border border-gray-300 rounded-md p-2 focus:ring-green-500 focus:border-green-500">
                 <option>निवडा</option>
                 <option value={'एक (अ) कर'}>एक (अ) कर</option>
-                <option value={'एक (ब) करेत्तर '}>एक (ब) करेत्तर</option>
+                <option value={'एक (ब) करेत्तर उत्पन्न'}>एक (ब) करेत्तर उत्पन्न</option>
                 <option value={'एक (क)अभिहस्तांकित रक्कमा'}>एक (क)अभिहस्तांकित रक्कमा</option>
                 <option value={'दोन (अ) राज्य शासन सहाय्य्क अनुदाने'}>दोन (अ) राज्य शासन सहाय्य्क अनुदाने</option>
                 <option value={'दोन (ब)जी.ग्रा.वि.निधी'}>दोन (ब)जी . ग्रा . वि . निधी</option>
@@ -186,8 +236,16 @@ function BudgetInformation() {
                 <option value={'(सहा) प्रारंभीची शिल्लक'}>(सहा) प्रारंभीची शिल्लक </option>
               </select>
             </div>
-
             <div>
+              <label className="block text-sm font-medium text-white mb-1"><label className='text-red-500'>*</label>खाते नाव</label>
+              <select name="accountName" onChange={handleInputChange} value={accountName} className="w-full border border-gray-300 rounded-md p-2 focus:ring-green-500 focus:border-green-500">
+                <option>निवडा</option>
+                {accountGroup && accountOptions[accountGroup] && accountOptions[accountGroup].map((option, index) => (
+                  <option key={index} value={option}>{option}</option>
+                ))}
+              </select>
+            </div>
+            {/* <div>
               <label className="block text-sm font-medium text-white mb-1"><label className='text-red-500'>*</label>खाते नाव</label>
               <select name='accountName' onChange={handleInputChange} value={accountName} className="w-full border border-gray-300 rounded-md p-2 focus:ring-green-500 focus:border-green-500">
                 <option>निवडा</option>
@@ -207,8 +265,8 @@ function BudgetInformation() {
                 <option value={'व्याज'}>व्याज</option>
                 <option value={'इतर कर'}>इतर कर</option>
               </select>
-            </div>
-            
+            </div> */}
+
 
             {/* Row 3 */}
             <div>
@@ -236,9 +294,9 @@ function BudgetInformation() {
             <div>
               <label className="block text-sm font-medium text-white mb-1"><label className='text-red-500'>*</label>वर्षासाठी पंचायतीची अंदाजित प्राप्ती </label>
               <input
-              name='estimatedReceiptsPanchayatYear'
-              onChange={handleInputChange}
-              value={estimatedReceiptsPanchayatYear}
+                name='estimatedReceiptsPanchayatYear'
+                onChange={handleInputChange}
+                value={estimatedReceiptsPanchayatYear}
                 type="number"
                 className="w-full border border-gray-300 rounded-md p-2 focus:ring-green-500 focus:border-green-500"
                 placeholder="0"
