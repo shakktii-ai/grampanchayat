@@ -18,9 +18,10 @@ export default function Home() {
       <h2 className="text-6xl font-bold text-center  text-white">ग्रामपंचायत</h2>
       <h2 className="text-lg  text-center text-white">आपल्या गावाची समृद्धी आणि विकास</h2>
       </div>
+      
       <div className="relative top-4 max-w-40 mb-3 border-white border-2 m-auto   py-2 rounded-full shadow-md">
         
-        <h2 className="text-lg font-bold text-center text-white">ग्रामपंचायती रचना</h2>
+        <h2 className="text-lg font-bold text-center text-white"><a href='/complaint'>ग्रामपंचायती रचना</a></h2>
       </div>
 
       {/* Members Section */}<div className='flex flex-col sm:flex-row lg:m-20 m-5 mt-0'>
@@ -85,8 +86,6 @@ export default function Home() {
 </div>
 </div>
 
-   
- <div className='m-10 h-5'></div>
    
   
 

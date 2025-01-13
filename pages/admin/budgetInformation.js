@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function BudgetInformation() {
   const [collection, setCollection] = useState('')
@@ -19,8 +22,9 @@ function BudgetInformation() {
   const [disabilityWelfareFund5, setDisabilityWelfareFund5] = useState('')
   const [mChildWelfare10, setMChildWelfare10] = useState('')
 
+  const [tableData, setTableData] = useState([]);
 
-  const accountOptions = {
+  const accountOptionsForCollection = {
     'एक (अ) कर': [
       'मालमत्ता कर, जमिनी व इमारती यावरील कर',
       'दिवाबत्ती कर',
@@ -52,7 +56,7 @@ function BudgetInformation() {
       'देणगी',
       'इतर जमा',
     ],
-    'एक (क)अभिहस्तांकित रक्कमा':[
+    'एक (क)अभिहस्तांकित रक्कमा': [
       'मुद्रांक शुल्क',
       'उपकर',
       'जमीन महसूल',
@@ -63,24 +67,81 @@ function BudgetInformation() {
       'मागास व आदिवासी क्षेत्रासाठी सहाय्य.',
       'यात्राकराऐवजी अनुदाने',
       'जकात नुकसानभरपाई अनुदाने',
-      'इतर अनुदाने',
-
+      'इतर अनुदाने',
     ],
-    'दोन) (अ) राज्य शासन सहाय्यक':[
-      
+    '(दोन) (अ) राज्य शासन सहाय्यक अनुदाने जमा': [
+      'शौचालय',
+      'दलित वस्ती सुधार',
+      'पाणीपुरवठा/टी.सी.एल.',
+      'बांधकाम',
+      'शिक्षण शाळा',
+      'मानधन, किमान वेतन व बैठक भत्ता.',
+      'आरोग्य',
+      'इतर',
     ],
   };
 
+  const accountOptionsForExpense = {
+    'खर्च गट १': ['खर्च १', 'खर्च २'],
+    'खर्च गट २': ['खर्च ३', 'खर्च ४'],
+  };
 
+  // const fetchTableData = async () => {
+  //   try {
+  //     const response = await axios.get('/api/namunaOne'); // Replace with actual API URL
+  //     // Ensure the response data is an array
+  //     if (Array.isArray(response.data)) {
+  //       setTableData(response.data);
+  //     } else {
+  //       console.error('API response is not an array');
+  //       setTableData([]);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error fetching table data:', error);
+  //     setTableData([]);  // Set an empty array in case of an error
+  //   }
+  // };
+
+  const fetchTableData = async () => {
+    try {
+      const response = await axios.get('/api/namunaOne');
+      console.log('API Response:', response.data);  // Log the entire response
+  
+      // Check if response.data contains the 'data' property and if it is an array
+      if (response.data && Array.isArray(response.data.data)) {
+        setTableData(response.data.data);  // Extract the 'data' array from the response
+      } else {
+        console.error('API response does not contain an array in the "data" property');
+        setTableData([]);  // Set table data to an empty array if the "data" property is not an array
+      }
+    } catch (error) {
+      console.error('Error fetching table data:', error);
+      setTableData([]);  // Handle the error gracefully by setting table data to empty
+    }
+  };
+  
+  
+  useEffect(() => {
+    fetchTableData(); // Fetch data when the component mounts
+  }, []);
+
+
+
+
+  const accountOptions = collection === 'जमा' ? accountOptionsForCollection : accountOptionsForExpense;
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
     if (name === 'collection') {
       setCollection(value);
       setExpense(''); // Reset expense when collection is selected
+      setAccountGroup(''); // Reset account group when changing category
+      setAccountName(''); // Reset account name when changing category
     } else if (name === 'expense') {
       setExpense(value);
-      setCollection('');
+      setCollection(''); // Reset collection when expense is selected
+      setAccountGroup(''); // Reset account group when changing category
+      setAccountName('');
     } else if (e.target.name == "financialYear") {
       setFinancialYear(e.target.value);
     } else if (e.target.name == "fundName") {
@@ -151,6 +212,16 @@ function BudgetInformation() {
 
     const result = await response.json();
     if (response.ok) {
+       toast.success("Your Request Send Successfull", {
+         position: "top-left",
+         autoClose: 3000,
+         hideProgressBar: false,
+         closeOnClick: true,
+         pauseOnHover: true,
+         draggable: true,
+         progress: undefined,
+         theme: "light",
+       });
       alert('Form submitted successfully');
     } else {
       alert('Error: ' + result.message);
@@ -158,6 +229,18 @@ function BudgetInformation() {
   };
   return (
     <>
+    <ToastContainer
+            position="top-left"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
       <div className="min-h-screen bg-transparent flex items-center lg:-m-11 justify-center lg:mr-3">
         <div className="w-full max-w-6xl bg-transparent shadow-lg rounded-lg p-8 ">
           <h2 className="text-lg font-bold text-white mb-6">अंदाजपत्रक माहिती</h2>
@@ -166,19 +249,16 @@ function BudgetInformation() {
           <form className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" onSubmit={handleSubmit}>
             {/* Row 1 */}
             <div className="  flex items-center space-x-4">
-              {/* Radio for खर्च */}
-
-
-              {/* Radio for जमा */}
+             
 
               <div className="w-full border border-gray-300 rounded-md p-2 mt-6 flex gap-7 justify-center bg-white">
                 <div className="flex items-center space-x-2">
                   <input
                     type="radio"
                     id="collection"
-                    value="collection"
+                    value="जमा"
                     name="collection"
-                    checked={collection === 'collection'}
+                    checked={collection === 'जमा'}
                     onChange={handleInputChange}
                     className="focus:ring-green-500 focus:border-green-500"
                   />
@@ -188,9 +268,9 @@ function BudgetInformation() {
                   <input
                     type="radio"
                     id="expense"
-                    value="expense"
+                    value="खर्च"
                     name="expense"
-                    checked={expense === 'expense'}
+                    checked={expense === 'खर्च'}
                     onChange={handleInputChange}
                     className="focus:ring-green-500 focus:border-green-500"
                   />
@@ -221,51 +301,29 @@ function BudgetInformation() {
 
             {/* Row 2 */}
 
-            <div>
-              <label className="block text-sm font-medium text-white mb-1"><label className='text-red-500'>*</label>खाते गट</label>
-              <select name='accountGroup' onChange={handleInputChange} value={accountGroup} className="w-full border border-gray-300 rounded-md p-2 focus:ring-green-500 focus:border-green-500">
-                <option>निवडा</option>
-                <option value={'एक (अ) कर'}>एक (अ) कर</option>
-                <option value={'एक (ब) करेत्तर उत्पन्न'}>एक (ब) करेत्तर उत्पन्न</option>
-                <option value={'एक (क)अभिहस्तांकित रक्कमा'}>एक (क)अभिहस्तांकित रक्कमा</option>
-                <option value={'दोन (अ) राज्य शासन सहाय्य्क अनुदाने'}>दोन (अ) राज्य शासन सहाय्य्क अनुदाने</option>
-                <option value={'दोन (ब)जी.ग्रा.वि.निधी'}>दोन (ब)जी . ग्रा . वि . निधी</option>
-                <option value={'(तीन )केंद्र शासन अनुदाने जमा'}>(तीन )केंद्र शासन अनुदाने जमा</option>
-                <option value={'(चार) संकीर्ण जमा'}>(चार) संकीर्ण जमा</option>
-                <option value={'(पाच) प्रारंभीची शिल्लक'}>(पाच) प्रारंभीची शिल्लक </option>
-                <option value={'(सहा) प्रारंभीची शिल्लक'}>(सहा) प्रारंभीची शिल्लक </option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-white mb-1"><label className='text-red-500'>*</label>खाते नाव</label>
-              <select name="accountName" onChange={handleInputChange} value={accountName} className="w-full border border-gray-300 rounded-md p-2 focus:ring-green-500 focus:border-green-500">
-                <option>निवडा</option>
-                {accountGroup && accountOptions[accountGroup] && accountOptions[accountGroup].map((option, index) => (
-                  <option key={index} value={option}>{option}</option>
-                ))}
-              </select>
-            </div>
-            {/* <div>
-              <label className="block text-sm font-medium text-white mb-1"><label className='text-red-500'>*</label>खाते नाव</label>
-              <select name='accountName' onChange={handleInputChange} value={accountName} className="w-full border border-gray-300 rounded-md p-2 focus:ring-green-500 focus:border-green-500">
-                <option>निवडा</option>
-                <option value={'मालमत्ता कर,जमिनी व इमारती या वरील कर'}>मालमत्ता कर , जमिनी व इमारती या वरील कर</option>
-                <option value={'दिवाबत्ती कर'}>दिवाबत्ती कर </option>
-                <option value={'स्वच्छता कर'}>स्वच्छता कर  </option>
-                <option value={'दुकाने लघुउद्योग व हॉटेल चालविणे यावरील कर'}>दुकाने लघुउद्योग व हॉटेल चालविणे यावरील कर </option>
-                <option value={'यात्रा कर'}>यात्रा कर</option>
-                <option value={'जरा, उत्सव व इतर मनोरंजन कर'}>जरा, उत्सव व इतर मनोरंजन कर</option>
-                <option value={'सायकल व इतर वाहनावरील कर'}>सायकल व इतर वाहनावरील  कर </option>
-                <option value={'टोल टॅक्स'}>टोल टॅक्स</option>
-                <option value={'उतारू व मलावरील कर'}>उतारू व मलावरील कर </option>
-                <option value={'वनविकास कर'}>वनविकास कर</option>
-                <option value={'सेवा कर'}>सेवा कर</option>
-                <option value={'व्यापारी किंवा आजीविकावरील कर (शेतीव्यतिरिक्त)'}>व्यापारी किंवा आजीविकावरील कर (शेतीव्यतिरिक्त)</option>
-                <option value={'गुरांच्या बाजारावरील दलालीचा व्यवसाय व अजिविकेवरील कर'}>गुरांच्या बाजारावरील दलालीचा व्यवसाय व अजिविकेवरील कर</option>
-                <option value={'व्याज'}>व्याज</option>
-                <option value={'इतर कर'}>इतर कर</option>
-              </select>
-            </div> */}
+            
+            
+              {/* Account Group */}
+          <div>
+            <label className="block text-sm font-medium text-white mb-1"><label className='text-red-500'>*</label>खाते गट</label>
+            <select name="accountGroup" onChange={handleInputChange} value={accountGroup} className="w-full border border-gray-300 rounded-md p-2 focus:ring-green-500 focus:border-green-500">
+              <option>निवडा</option>
+              {Object.keys(accountOptions).map((group, index) => (
+                <option key={index} value={group}>{group}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* Account Name */}
+          <div>
+            <label className="block text-sm font-medium text-white mb-1"><label className='text-red-500'>*</label>खाते नाव</label>
+            <select name="accountName" onChange={handleInputChange} value={accountName} className="w-full border border-gray-300 rounded-md p-2 focus:ring-green-500 focus:border-green-500">
+              <option>निवडा</option>
+              {accountGroup && accountOptions[accountGroup]?.map((option, index) => (
+                <option key={index} value={option}>{option}</option>
+              ))}
+            </select>
+          </div>
 
 
             {/* Row 3 */}
@@ -393,23 +451,53 @@ function BudgetInformation() {
                 placeholder="0"
               />
             </div>
-          </form>
-
-          {/* Buttons */}
-          <div className="flex justify-end space-x-4 mt-6">
+            <div className="flex justify-end space-x-4 mt-6">
             <button
               type="submit"
               className="bg-blue-500 text-white px-6 py-2 rounded-md shadow-md hover:bg-blue-600 transition"
             >
               साठवा
             </button>
-            <button
-              type="button"
-              className="bg-gray-300 text-white px-6 py-2 rounded-md shadow-md hover:bg-gray-400 transition"
-            >
-              रद्द करा
-            </button>
-          </div>
+            </div>
+          </form>
+
+          <div className="overflow-x-auto  mt-5">
+        <table className="w-full border-collapse border border-gray-300 ">
+          <thead className="bg-blue-400 text-white">
+            <tr>
+        <th className="border text-sm">अ. क्र.</th>
+        <th className="border text-sm">फंडाचे नाव</th>
+        <th className="border w-20 text-sm">खाते गट</th>
+        <th className="border w-20  text-sm">खाते नाव</th>
+        <th className="border text-sm">जमा/खर्च</th>
+        <th className="border w-20 text-sm">आर्थिक वर्ष</th>
+        <th className="border text-sm">गतपूर्व वर्षात मिळालेली प्रत्यक्ष रक्कम</th>
+        <th className="border text-sm">मागील वर्षी मिळालेली प्रत्यक्ष रक्कम</th>
+        <th className="border text-sm">चालू वर्षासाठी मंजुरकेलेली अंदाजित रक्कम</th>
+        <th className="border text-sm">चालू वर्षासाठी पंचायतीची अंदाजित रक्कम</th>
+      </tr>
+    </thead>
+    {/* Table Body */}
+    <tbody>
+      {tableData.map((row, index) => (
+        <tr key={index}>
+          <td className="border text-white  text-sm">{index + 1}</td>
+          <td className="border text-white  text-sm">{row.fundName}</td>
+          <td className="border text-white  text-sm">{row.accountGroup}</td>
+          <td className="border text-white  text-sm">{row.accountName}</td>
+          <td className="border text-white  text-sm">{row.collection || row.expense}</td>
+          <td className="border text-white  text-sm">{row.financialYear}</td>
+          <td className="border text-white  text-sm">{row.previousYearActualAmount}</td>
+          <td className="border text-white  text-sm">{row.lastYearAmount}</td>
+          <td className="border text-white  text-sm">{row.estimatedAmountCurrentYear}</td>
+          <td className="border text-white  text-sm">{row.estimatedPanchayatAmount}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+{/* </div> */}
+</div>
+         
         </div>
       </div>
     </>

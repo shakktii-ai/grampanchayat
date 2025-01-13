@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 
 const NamunaOneSchema = new mongoose.Schema({
-    collection: { type: String, required: true },
-    expense: { type: String, required: true },
+    collection: { type: String,  },
+    expense: { type: String,  },
           financialYear: { type: String, required: true },
           fundName: { type: String, required: true },
           accountGroup: { type: String, required: true },

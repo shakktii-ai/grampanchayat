@@ -268,7 +268,7 @@ export default function App({ Component, pageProps }) {
       </div>
 
       {/* Footer */}
-      <div className="relative z-50 top-12 max-w-full w-full">
+      <div className="relative z-20 top-12 max-w-full w-full">
          <Footer />
       </div>
     </div>

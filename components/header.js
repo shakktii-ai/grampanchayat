@@ -614,7 +614,7 @@ function Header() {
       <div
   className={`${
     isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-  } transition-transform fixed inset-0 z-10 bg-gray-100 w-64 sm:w-64 lg:float-left lg:translate-x-0 lg:static`}
+  } transition-transform fixed inset-0 z-10 lg:mr-14  bg-gray-100 w-64 sm:w-64 lg:float-left lg:translate-x-0 lg:static`}
 >
         {/* Sidebar Content */}
         <aside>
@@ -622,7 +622,7 @@ function Header() {
             <h1 className="text-xl text-blue-500 font-bold">ग्रामपंचायत</h1>
             <p className="text-sm text-gray-400">आपल्या गावाची समृद्धी आणि विकास</p>
           </div> */}
-          <nav className="flex-grow mt-28 lg:mt-auto">
+          <nav className="flex-grow mt-28 lg:mt-auto ">
             <ul className="space-y-4">
               <Link href="/admin/">
                 <li className="px-6 py-3 hover:bg-gray-700 cursor-pointer flex items-center">
@@ -634,6 +634,18 @@ function Header() {
                 <li className="px-6 py-3 hover:bg-gray-700 cursor-pointer flex items-center">
                   <span>📝</span>
                   <span className="ml-3">नवीन विनंती</span>
+                </li>
+              </Link>
+              <Link href="/admin/tharavPost">
+                <li className="px-6 py-3 hover:bg-gray-700 cursor-pointer flex items-center">
+                  <span>📝</span>
+                  <span className="ml-3">ठराव पोस्ट </span>
+                </li>
+              </Link>
+              <Link href="/admin/developmentwork">
+                <li className="px-6 py-3 hover:bg-gray-700 cursor-pointer flex items-center">
+                  <span>📝</span>
+                  <span className="ml-3">विकास काम</span>
                 </li>
               </Link>
               <div className="relative">

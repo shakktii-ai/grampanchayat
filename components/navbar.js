@@ -352,8 +352,9 @@ const Navbar = () => {
           <div className="hidden md:flex space-x-6">
             <Link href="/" className="text-black font-bold hover:text-red-700 cursor-pointer">मुख्य पृष्ठ</Link>
             <Link href="/seva" className="text-black hover:text-gray-700">सेवा</Link>
-            <Link href="#" className="text-black hover:text-gray-700">रोजगार आणि मदत</Link>
-            <Link href="#" className="text-black hover:text-gray-700">सामाजिक कल्याण</Link>
+            <Link href="/complaint" className="text-black hover:text-gray-700">तक्रार</Link>
+            <Link href="/tharavPost" className="text-black hover:text-gray-700">ठराव</Link>
+            <Link href="/developmentwork" className="text-black hover:text-gray-700">विकास कार्य</Link>
           </div>
 
           {/* Search Bar (Desktop) */}
@@ -418,8 +419,9 @@ const Navbar = () => {
           <div className="absolute top-full left-0 w-full bg-white shadow-md rounded-md p-4 z-50">
             <Link href="/" className="block text-black hover:text-gray-700 mb-2">मुख्य पृष्ठ</Link>
             <Link href="/seva" className="block text-black hover:text-gray-700 mb-2">सेवा</Link>
-            <Link href="#" className="block text-black hover:text-gray-700 mb-2">रोजगार आणि मदत</Link>
-            <Link href="#" className="block text-black hover:text-gray-700 mb-4">सामाजिक कल्याण</Link>
+            <Link href="/complaint" className="block text-black hover:text-gray-700 mb-2">तक्रार</Link>
+            <Link href="/tharavPost" className="block text-black hover:text-gray-700 mb-2">ठराव</Link>
+            <Link href="/developmentwork" className="block text-black hover:text-gray-700 mb-2">विकास कार्य</Link>
 
             {/* Mobile Search Bar */}
             <div className="flex items-center border rounded-full px-4 py-2">
