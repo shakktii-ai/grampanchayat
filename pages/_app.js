@@ -226,6 +226,57 @@
 // }
 
 
+// import "@/styles/globals.css";
+// import Navbar from "@/components/navbar";
+// import Footer from "@/components/footer";
+// import Aside from "@/components/aside";
+// import Headers from "@/components/header";
+// import { useState } from "react";
+// import { useRouter } from "next/router";
+
+// export default function App({ Component, pageProps }) {
+//   const router = useRouter();
+//   const [isModalOpen, setIsModalOpen] = useState(false);
+//   // Check if the current route is an admin page
+//   const isAdminPage = router.pathname.startsWith("/admin");
+//   const isTestPage = router.pathname.startsWith("/test");
+//   const isNewRequestPage = router.pathname === "/admin/newRequest?";
+//   const shouldHideHeader = (isNewRequestPage && isModalOpen) || isAdminPage;
+//   return (
+//     <div className={`relative min-h-screen w-full ${isAdminPage ? 'bg-white' : 'bg-gray-100'}`}>
+//       {/* Background Image */}
+    
+//         <div className="absolute top-0 left-0 w-full h-full z-0">
+//           <img
+//             src="/home.png" // Replace with the correct image path
+//             alt="Landscape"
+//             className="w-full h-full object-cover"
+//           />
+//           {/* White Border Overlay */}
+//           <div className="absolute inset-0 m-8 border-4 bg-black opacity-50 border-white rounded-lg pointer-events-none" />
+//         </div>
+      
+
+//       {/* Navbar */}
+//       <div className="relative z-20 top-12 mx-auto max-w-6xl w-full px-4 sm:px-4 md:px-4 lg:px-5">
+//       { isAdminPage && <Headers />} {!isAdminPage && <Navbar />}
+//          {/* <Aside />  */}
+//       </div>
+
+//       {/* Content Section */}
+//       <div className="relative z-10 pt-24 px-4 sm:px-6 md:px-8">
+//         <Component {...pageProps} setIsModalOpen={setIsModalOpen} />
+//       </div>
+
+//       {/* Footer */}
+//       <div className="relative z-20 top-12 max-w-full w-full">
+//          <Footer />
+//       </div>
+//     </div>
+//   );
+// }
+
+
 import "@/styles/globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
@@ -239,27 +290,27 @@ export default function App({ Component, pageProps }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   // Check if the current route is an admin page
   const isAdminPage = router.pathname.startsWith("/admin");
+  const isTestPage = router.pathname.startsWith("/test");
   const isNewRequestPage = router.pathname === "/admin/newRequest?";
-  const shouldHideHeader = (isNewRequestPage && isModalOpen) || isAdminPage;
+  const shouldHideHeader = (isNewRequestPage && isModalOpen) || isAdminPage || isTestPage;
+
   return (
     <div className={`relative min-h-screen w-full ${isAdminPage ? 'bg-white' : 'bg-gray-100'}`}>
       {/* Background Image */}
-    
-        <div className="absolute top-0 left-0 w-full h-full z-0">
-          <img
-            src="/home.png" // Replace with the correct image path
-            alt="Landscape"
-            className="w-full h-full object-cover"
-          />
-          {/* White Border Overlay */}
-          <div className="absolute inset-0 m-8 border-4 bg-black opacity-50 border-white rounded-lg pointer-events-none" />
-        </div>
-      
+      <div className="absolute top-0 left-0 w-full h-full z-0">
+        <img
+          src="/home.png" // Replace with the correct image path
+          alt="Landscape"
+          className="w-full h-full object-cover"
+        />
+        {/* White Border Overlay */}
+        <div className="absolute inset-0 m-8 border-4 bg-black opacity-50 border-white rounded-lg pointer-events-none" />
+      </div>
 
-      {/* Navbar */}
+      {/* Navbar and Header */}
       <div className="relative z-20 top-12 mx-auto max-w-6xl w-full px-4 sm:px-4 md:px-4 lg:px-5">
-      { isAdminPage && <Headers />} {!isAdminPage && <Navbar />}
-         {/* <Aside />  */}
+        {/* Only show Navbar or Header based on conditions */}
+        {!shouldHideHeader && (isAdminPage ? <Headers /> : <Navbar />)}
       </div>
 
       {/* Content Section */}
@@ -269,7 +320,7 @@ export default function App({ Component, pageProps }) {
 
       {/* Footer */}
       <div className="relative z-20 top-12 max-w-full w-full">
-         <Footer />
+        <Footer />
       </div>
     </div>
   );

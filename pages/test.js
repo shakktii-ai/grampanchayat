@@ -1976,6 +1976,38 @@ export default function Home() {
         question: 'You are leading a team meeting, and one member consistently interrupts others. How would you address this behavior?',
         correctAnswer: 'I would politely ask the team member to hold their thoughts until others have finished speaking.',
       },
+      {
+              question: "A colleague is consistently late in submitting their work, impacting the project timeline. How would you handle this situation?",
+              correctAnswer: "I would have a one-on-one conversation with the colleague to understand the issue and work together to resolve it."
+            },
+            {
+              question: "You’re assigned a task you don’t have the required skills for, and the deadline is approaching. How would you handle it?",
+              correctAnswer: "I would reach out for assistance from a colleague or look for online resources to help complete the task on time."
+            },
+            {
+              question: "During a project, you find out that the initial requirements were misunderstood. How would you handle this situation?",
+              correctAnswer: "I would clarify the requirements with the team, adjust the project plan, and communicate the changes to stakeholders."
+            },
+            {
+              question: "You have a conflict with a coworker over the approach to solving a problem. How would you resolve this?",
+              correctAnswer: "I would suggest having a constructive discussion to understand each other's perspectives and find a middle ground."
+            },
+            {
+              question: "You notice a team member is struggling with their workload. How would you offer assistance?",
+              correctAnswer: "I would offer to help with some of their tasks or suggest ways to prioritize their workload more effectively."
+            },
+            {
+              question: "A client provides feedback that they are unhappy with your work. How would you respond?",
+              correctAnswer: "I would listen to their concerns, apologize for any mistakes, and work with them to make the necessary adjustments."
+            },
+            {
+              question: "You are tasked with managing a project with a tight deadline and limited resources. How would you handle this?",
+              correctAnswer: "I would prioritize tasks, allocate resources effectively, and keep communication open with the team to ensure we meet the deadline."
+            },
+            {
+              question: "Your team is experiencing low morale due to recent challenges. How would you motivate them?",
+              correctAnswer: "I would acknowledge the challenges, encourage open communication, and celebrate small wins to boost team morale."
+            }
     ];
 
     for (let i = 0; i < scenarios.length; i++) {
