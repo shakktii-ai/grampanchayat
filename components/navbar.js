@@ -340,9 +340,12 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { MdAccountCircle } from 'react-icons/md';
 
-const Navbar = () => {
+const Navbar = ({ Logout, user }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [dropdown, setDropdown] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <nav className="bg-white shadow-md rounded-md relative  mx-7">
@@ -358,29 +361,33 @@ const Navbar = () => {
           </div>
 
           {/* Search Bar (Desktop) */}
-          <div className="hidden md:flex items-center border rounded-full px-4 py-2">
-            <input
-              type="text"
-              placeholder="शोधा..."
-              className="outline-none flex-grow bg-transparent"
-            />
-            <button className="text-black hover:text-gray-700">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-4.35-4.35M15 11a4 4 0 11-8 0 4 4 0 018 0z"
-                />
-              </svg>
-            </button>
+          <div className="relative">
+        {user?.value && (
+          <div onMouseOver={() => setDropdown(true)} onMouseLeave={() => setDropdown(false)} className="relative">
+            <MdAccountCircle className="text-2xl md:text-3xl mx-2  cursor-pointer" />
+            {dropdown && (
+              <div className="absolute right-0 bg-white shadow-2xl top-10 rounded-md w-32 border-2 border-solid">
+                <ul>
+                  <li href='/' className="hover:text-red-700 text-sm font-bold  p-2 cursor-pointer   m-3 ">Profile</li>
+                </ul>
+                <ul>
+                  <li onClick={Logout} className="hover:text-red-700 text-sm font-bold  p-2 cursor-pointer   m-3 ">Logout</li>
+                </ul>
+              </div>
+            )}
           </div>
+        )}
+      </div>
+
+      {/* Right side Login button (for guests) */}
+      {!user?.value && (
+        <Link href="/login">
+          <div className="ml-4">
+            <button className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700">Login</button>
+          </div>
+        </Link>
+      )}
+    </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">
@@ -405,7 +412,7 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-      </div>
+      
 
       {/* Mobile Menu Dropdown */}
       {isOpen && (
@@ -424,30 +431,31 @@ const Navbar = () => {
             <Link href="/developmentwork" className="block text-black hover:text-gray-700 mb-2">विकास कार्य</Link>
 
             {/* Mobile Search Bar */}
-            <div className="flex items-center border rounded-full px-4 py-2">
-              <input
-                type="text"
-                placeholder="शोधा..."
-                className="outline-none flex-grow bg-transparent"
-              />
-              <button className="text-black hover:text-gray-700">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-4.35-4.35M15 11a4 4 0 11-8 0 4 4 0 018 0z"
-                  />
-                </svg>
-              </button>
-            </div>
+            <div className="relative">
+        {user?.value && (
+          <div onMouseOver={() => setDropdown(true)} onMouseLeave={() => setDropdown(false)} className="relative">
+            <MdAccountCircle className="text-2xl md:text-3xl mx-2 cursor-pointer" />
+            {dropdown && (
+              <div className="absolute right-0 bg-white shadow-2xl top-10 rounded-md w-32 border-2 border-solid">
+                <ul>
+                  <li onClick={Logout} className="hover:text-red-700 text-sm font-bold  p-2 cursor-pointer border-2 border-solid m-3 border-red-700">Logout</li>
+                </ul>
+              </div>
+            )}
           </div>
+        )}
+      </div>
+
+      {/* Right side Login button (for guests) */}
+      {!user?.value && (
+        <Link href="/login">
+          <div className="ml-4">
+            <button className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700">Login</button>
+          </div>
+        </Link>
+      )}
+    </div>
+          
         </>
       )}
     </nav>

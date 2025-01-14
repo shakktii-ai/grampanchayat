@@ -1,11 +1,17 @@
 
 
-import React ,{useState}from 'react';
-
+import React ,{useState,useEffect}from 'react';
+import { useRouter } from 'next/router';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Complaint() {
+   const router = useRouter();
+    useEffect(() => {
+      if (!localStorage.getItem("token")) {
+        router.push("/login");
+      }
+    }, []);
   const [fullName,setFullName]=useState('')
   const [email,setEmail]=useState('')
   const [mobileNo,setMobileNo]=useState('')

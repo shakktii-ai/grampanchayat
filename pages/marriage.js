@@ -1,9 +1,16 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState ,useEffect} from 'react'
+import { useRouter } from 'next/router';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Marriage() {
+   const router = useRouter();
+    useEffect(() => {
+      if (!localStorage.getItem("token")) {
+        router.push("/login");
+      }
+    }, []);
     const [husbandFullName,setHusbandFullName]=useState('')
     const [wifeFullName,setWifeFullName]=useState('')
     const [husbandDateOfBirth,setHusbandDateOfBirth]=useState('')
