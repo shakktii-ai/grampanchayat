@@ -230,7 +230,7 @@ const handleSubmit = async (event) => {
         pauseOnHover
         theme="light"
       />
-        <div className="min-h-screen flex items-center justify-center">
+        <div className=" min-h-screen -mt-10 flex items-center justify-center">
             <div className="bg-orange-200 shadow-lg rounded-lg p-8 w-11/12 max-w-4xl">
                 <h1 className="text-center text-xl font-bold text-orange-900">
                     भूतकाळातील आणि चालू असलेली विकास कामे
@@ -386,7 +386,9 @@ const handleSubmit = async (event) => {
                     </form>
                 </div>
             </div>
-        </div></>
+        </div>
+            <div className='mt-10  h-8'></div>
+        </>
     );
 }
 
