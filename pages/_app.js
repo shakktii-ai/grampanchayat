@@ -499,7 +499,9 @@ export default function App({ Component, pageProps }) {
 
   return (
     <div className={`relative min-h-screen w-full ${isAdminPage ? 'bg-white' : 'bg-gray-100'}`}>
-      {/* Background Image */}
+      {/* Background Image */}<div className="relative z-20 top-0 max-w-full w-full">
+        {!isAdminRoute && <Footer />}
+      </div>
       <div className="absolute top-0 left-0 w-full h-full z-0">
         <img
           src="/home.png" // Replace with the correct image path
