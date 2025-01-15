@@ -104,6 +104,7 @@
 // pages/index.js
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -119,7 +120,7 @@ export default function Home() {
       <div className="m-5 grid grid-cols-1 md:grid-cols-3 gap-4">
   {/* Left Image */}
   <div className="h-56 w-full flex justify-center items-center mb-4 md:mb-0">
-    <img className="object-cover w-full h-full rounded-lg" src="/1.jpg" alt="Image 1" />
+    <img className="object-cover w-full h-full rounded-lg" src="https://www.shutterstock.com/shutterstock/photos/642316276/display_1500/stock-vector-potato-chips-advertisement-spicy-flavor-d-illustration-642316276.jpg" alt="Image 1" />
   </div>
 
   {/* Main Title and Subheading */}
@@ -134,7 +135,7 @@ export default function Home() {
 
   {/* Right Image */}
   <div className="h-56 w-full flex justify-center items-center mb-4 md:mb-0">
-    <img className="object-cover w-full h-full rounded-lg" src="/1.jpg" alt="Image 2" />
+    <img className="object-cover w-full h-full rounded-lg" src="https://www.shutterstock.com/shutterstock/photos/642316276/display_1500/stock-vector-potato-chips-advertisement-spicy-flavor-d-illustration-642316276.jpg" alt="Image 2" />
   </div>
 </div>
 
@@ -142,7 +143,7 @@ export default function Home() {
       {/* Link Button */}
       <div className="relative top-4 max-w-xs mb-5 mx-auto py-2 rounded-full shadow-md border-2 border-white">
         <h2 className="text-lg font-bold text-center text-white">
-          <a href="/complaint">ग्रामपंचायती रचना</a>
+          <a >ग्रामपंचायती रचना</a>
         </h2>
       </div>
 
@@ -279,6 +280,138 @@ export default function Home() {
   </div>
 
 </div>
+
+
+<div className="relative inset-0 flex flex-col lg:flex-row gap-4 p-4">
+  {/* Table 1 */}
+  <div className="max-w-full lg:max-w-md bg-white/80 backdrop-blur-md rounded-lg border border-gray-300 shadow-lg">
+    <div className="text-center bg-gray-800 text-white py-2 rounded-t-lg text-lg font-semibold">
+      आदर्श तक्ता
+    </div>
+    <div className="overflow-x-auto">
+      <table className="w-full border-collapse">
+        <tbody>
+          <tr className="border-b">
+            <td className="px-4 py-2 border-r font-medium whitespace-nowrap">स्थापना दिनांक</td>
+            <td className="px-4 py-2 text-right whitespace-nowrap">25/02/1970</td>
+          </tr>
+          <tr className="border-b">
+            <td className="px-4 py-2 border-r font-medium whitespace-nowrap">प्रा.प फोन नं.</td>
+            <td className="px-4 py-2 text-right whitespace-nowrap">18002705020</td>
+          </tr>
+          <tr className="border-b">
+            <td className="px-4 py-2 border-r font-medium whitespace-nowrap">Email address</td>
+            <td className="px-4 py-2 text-right whitespace-nowrap">-</td>
+          </tr>
+          <tr className="border-b">
+            <td className="px-4 py-2 border-r font-medium text-blue-600 underline cursor-pointer whitespace-nowrap">
+              <Link href='/membersList'> सदस्य संख्या</Link>
+            </td>
+            <td className="px-4 py-2 text-right whitespace-nowrap">17</td>
+          </tr>
+          <tr className="border-b">
+            <td className="px-4 py-2 border-r font-medium whitespace-nowrap">कार्यकर्ते संख्या</td>
+            <td className="px-4 py-2 text-right whitespace-nowrap">-</td>
+          </tr>
+          <tr className="border-b">
+            <td className="px-4 py-2 border-r font-medium whitespace-nowrap">लोकसंख्या</td>
+            <td className="px-4 py-2 text-right whitespace-nowrap">-</td>
+          </tr>
+          <tr className="border-b">
+            <td className="px-4 py-2 border-r font-medium whitespace-nowrap">क्षेत्रफळ</td>
+            <td className="px-4 py-2 text-right whitespace-nowrap">-</td>
+          </tr>
+          <tr className="border-b">
+            <td className="px-4 py-2 border-r font-medium whitespace-nowrap">पुढचा निकाल</td>
+            <td className="px-4 py-2 text-right whitespace-nowrap">-</td>
+          </tr>
+          <tr className="border-b">
+            <td className="px-4 py-2 border-r font-medium whitespace-nowrap">प्रा.प.उत्सव</td>
+            <td className="px-4 py-2 text-right whitespace-nowrap">-</td>
+          </tr>
+          <tr>
+            <td className="px-4 py-2 border-r font-medium text-blue-600 underline cursor-pointer whitespace-nowrap">
+              टेलीफोन ऑफिस
+            </td>
+            <td className="px-4 py-2 text-right whitespace-nowrap">-</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  {/* Section Text */}
+  <div className="w-full lg:w-auto">
+    <h2 className='text-red-600 font-bold text-xl'>गायरान अतिक्रमण धारकांची नावे</h2>
+    <p className='text-white '>
+      शासन निणय क्रमांक-ग्रामविकास विभाग,प्रआयो-2017/प्र.क्र.348/योजना-10,दिनांक-26 फेब्रुवारी,2018. या शासन निणया प्रमाणे सवांसाठी घरे 2022 या धोरणाची अमलबजावणी करण्यासाठी गायरान अतिक्रमण धारकांची नावे मुखप्रुष्ठातुन खातेदार मेन्युत जाऊन झालेल्या सभेची माहिती येथे प्रमाणीत अहवाल अोपन होईल.
+      </p>
+      <h2 className='text-red-600 font-bold text-xl'>5 % Exemption on House Tax / घरपट्टी वर ५ % सुट</h2>
+      <p className='text-white'>
+      If the tax payer pays all tax as per assessment in first six month of the financial year, the tax payer shall be entitled to get five per cent. exemption on tax payment. कर आकारणी करण्यात येणाऱ्या आर्थिक वर्षातील पहिल्या सहा महिन्यांत करदात्याने संपूर्ण कर भरला असेल तर तो करदाता कराच्या रकमेवर ५ % इतक्या प्रमाणात सूट देण्यासाठी हक्कदार असेल.
+      </p>
+  </div>
+
+  {/* Table 2 */}
+  <div className="w-full lg:max-w-md bg-white/80 backdrop-blur-md rounded-lg border border-gray-300 shadow-lg">
+    <div className="text-center bg-gray-800 text-white py-2 rounded-t-lg text-lg font-semibold">
+      आदर्श तक्ता
+    </div>
+    <div className="overflow-x-auto">
+      <table className="w-full border-collapse">
+        <tbody>
+          <tr className="border-b">
+            <td className="px-4 py-2 font-medium whitespace-nowrap">स्थापना दिनांक</td>
+            <td className="px-4 py-2 text-right whitespace-nowrap">25/02/1970</td>
+          </tr>
+          <tr className="border-b">
+            <td className="px-4 py-2 font-medium whitespace-nowrap">प्रा.प फोन नं.</td>
+            <td className="px-4 py-2 text-right whitespace-nowrap">18002705020</td>
+          </tr>
+          <tr className="border-b">
+            <td className="px-4 py-2 font-medium whitespace-nowrap">Email address</td>
+            <td className="px-4 py-2 text-right whitespace-nowrap">-</td>
+          </tr>
+          <tr className="border-b">
+            <td className="px-4 py-2 font-medium text-blue-600 underline cursor-pointer whitespace-nowrap">
+              सदस्य संख्या
+            </td>
+            <td className="px-4 py-2 text-right whitespace-nowrap">17</td>
+          </tr>
+          <tr className="border-b">
+            <td className="px-4 py-2 font-medium whitespace-nowrap">कार्यकर्ते संख्या</td>
+            <td className="px-4 py-2 text-right whitespace-nowrap">-</td>
+          </tr>
+          <tr className="border-b">
+            <td className="px-4 py-2 font-medium whitespace-nowrap">लोकसंख्या</td>
+            <td className="px-4 py-2 text-right whitespace-nowrap">-</td>
+          </tr>
+          <tr className="border-b">
+            <td className="px-4 py-2 font-medium whitespace-nowrap">क्षेत्रफळ</td>
+            <td className="px-4 py-2 text-right whitespace-nowrap">-</td>
+          </tr>
+          <tr className="border-b">
+            <td className="px-4 py-2 font-medium whitespace-nowrap">पुढचा निकाल</td>
+            <td className="px-4 py-2 text-right whitespace-nowrap">-</td>
+          </tr>
+          <tr className="border-b">
+            <td className="px-4 py-2 font-medium whitespace-nowrap">प्रा.प.उत्सव</td>
+            <td className="px-4 py-2 text-right whitespace-nowrap">-</td>
+          </tr>
+          <tr>
+            <td className="px-4 py-2 font-medium text-blue-600 underline cursor-pointer whitespace-nowrap">
+              टेलीफोन ऑफिस
+            </td>
+            <td className="px-4 py-2 text-right whitespace-nowrap">-</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+   
 
       
     </>
