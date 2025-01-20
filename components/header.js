@@ -501,11 +501,14 @@ import Link from 'next/link';
 function Header() {
   const [isOpen, setIsOpen] = useState(false); // For mobile menu dropdown
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // For sidebar toggle
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isDropdown1Open, setIsDropdown1Open] = useState(false); // For Namuna 1 dropdown
+  const [isDropdown2Open, setIsDropdown2Open] = useState(false);
 
+
+  
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
-   
-   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen); // Toggle sidebar state
+  const toggleDropdown1 = () => setIsDropdown1Open(!isDropdown1Open); // Toggle Namuna 1 dropdown
+  const toggleDropdown2 = () => setIsDropdown2Open(!isDropdown2Open); // Toggle sidebar state
 
   return (
     <nav className=" bg-white shadow-md rounded-md relative mx-7 ">
@@ -650,7 +653,7 @@ function Header() {
               </Link>
               <div className="relative">
                 <button
-                  onClick={toggleDropdown}
+                  onClick={toggleDropdown1}
                   className="w-full px-6 py-3 hover:bg-gray-700 cursor-pointer flex items-center justify-between bg-gray-100 text-black"
                 >
                   <span>📋 नमुना क्र. 1</span>
@@ -669,7 +672,7 @@ function Header() {
                     />
                   </svg>
                 </button>
-                {isDropdownOpen && (
+                {isDropdown1Open && (
                   <ul className="absolute left-0 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg z-10">
                     <Link href="/admin/budgetInformation">
                       <li className="px-6 py-3 hover:bg-gray-700 cursor-pointer">अंदाजपत्रक माहिती</li>
@@ -678,7 +681,37 @@ function Header() {
                   </ul>
                 )}
               </div>
-
+              {/* Another dropdown for Namuna 2 */}
+              <div className="relative">
+                <button
+                  onClick={toggleDropdown2}
+                  className="w-full px-6 py-3 hover:bg-gray-700 cursor-pointer flex items-center justify-between bg-gray-100 text-black"
+                >
+                  <span>📋 नमुना क्र. 2</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 9l6 6 6-6"
+                    />
+                  </svg>
+                </button>
+                {isDropdown2Open && (
+                  <ul className="absolute left-0 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg z-10">
+                    <Link href="/admin/budgetInformation">
+                      <li className="px-6 py-3 hover:bg-gray-700 cursor-pointer">पूर्वनियोजन अंदाजपत्रक</li>
+                    </Link>
+                    <li className="px-6 py-3 hover:bg-gray-700 cursor-pointer">वार्षिक अहवाल ↓ पूर्वनियोजन अंदाजपत्र</li>
+                  </ul>
+                )}
+              </div>
 
 
               <li className="px-6 py-3 hover:bg-gray-700 cursor-pointer flex items-center">

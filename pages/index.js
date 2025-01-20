@@ -120,7 +120,7 @@ export default function Home() {
       <div className="m-5 grid grid-cols-1 md:grid-cols-3 gap-4">
   {/* Left Image */}
   <div className="h-56 w-full flex justify-center items-center mb-4 md:mb-0">
-    <img className="object-cover w-full h-full rounded-lg" src="https://www.shutterstock.com/shutterstock/photos/642316276/display_1500/stock-vector-potato-chips-advertisement-spicy-flavor-d-illustration-642316276.jpg" alt="Image 1" />
+    <img className="object-cover w-full h-full rounded-lg" src="/ads1.jpg" alt="Image 1" />
   </div>
 
   {/* Main Title and Subheading */}
@@ -135,7 +135,7 @@ export default function Home() {
 
   {/* Right Image */}
   <div className="h-56 w-full flex justify-center items-center mb-4 md:mb-0">
-    <img className="object-cover w-full h-full rounded-lg" src="https://www.shutterstock.com/shutterstock/photos/642316276/display_1500/stock-vector-potato-chips-advertisement-spicy-flavor-d-illustration-642316276.jpg" alt="Image 2" />
+    <img className="object-cover w-full h-full rounded-lg" src="ads.jpg" alt="Image 2" />
   </div>
 </div>
 
@@ -342,10 +342,10 @@ export default function Home() {
 
   {/* Section Text */}
   <div className="w-full lg:w-auto">
-    <h2 className='text-red-600 font-bold text-xl'>गायरान अतिक्रमण धारकांची नावे</h2>
+    <h2 className='text-red-600 bg-white font-bold text-xl'>गायरान अतिक्रमण धारकांची नावे</h2>
     <p className='text-white '>
       शासन निणय क्रमांक-ग्रामविकास विभाग,प्रआयो-2017/प्र.क्र.348/योजना-10,दिनांक-26 फेब्रुवारी,2018. या शासन निणया प्रमाणे सवांसाठी घरे 2022 या धोरणाची अमलबजावणी करण्यासाठी गायरान अतिक्रमण धारकांची नावे मुखप्रुष्ठातुन खातेदार मेन्युत जाऊन झालेल्या सभेची माहिती येथे प्रमाणीत अहवाल अोपन होईल.
-      </p>
+      </p> 
       <h2 className='text-red-600 font-bold text-xl'>5 % Exemption on House Tax / घरपट्टी वर ५ % सुट</h2>
       <p className='text-white'>
       If the tax payer pays all tax as per assessment in first six month of the financial year, the tax payer shall be entitled to get five per cent. exemption on tax payment. कर आकारणी करण्यात येणाऱ्या आर्थिक वर्षातील पहिल्या सहा महिन्यांत करदात्याने संपूर्ण कर भरला असेल तर तो करदाता कराच्या रकमेवर ५ % इतक्या प्रमाणात सूट देण्यासाठी हक्कदार असेल.

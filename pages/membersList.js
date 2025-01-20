@@ -49,7 +49,7 @@ function MembersList() {
               <tr key={index} className="bg-orange-100 text-gray-800">
                 <td className="border border-gray-300 px-4 py-2 text-center">{index + 1}</td>
                 <td className="border border-gray-300 px-4 py-2">{member}</td>
-                <td className="border border-gray-300 px-4 py-2 text-center">-</td>
+                <td className="border border-gray-300 px-4 py-2 text-center">सदस्य</td>
                 <td className="border border-gray-300 px-4 py-2 text-center">-</td>
                 <td className="border border-gray-300 px-4 py-2 text-center">-</td>
               </tr>
