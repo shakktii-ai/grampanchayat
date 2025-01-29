@@ -511,11 +511,11 @@ function Header() {
   const toggleDropdown2 = () => setIsDropdown2Open(!isDropdown2Open); // Toggle sidebar state
 
   return (
-    <nav className=" bg-white shadow-md rounded-md relative mx-7 ">
+    <nav className=" bg-white shadow-md rounded-md rounded-bl-none relative mx-7 ">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center py-4">
           {/* Desktop Menu */}
-          <img src='/Logo.gif' className='h-8 m-auto' />
+          <img src='/S_AI_png.png' className='h-10 m-auto' />
             <h1 className="  text-black text-center mx-20 lg:mx-36  font-bold text-2xl hover:text-gray-700 mb-2">
             <Link href="/admin"> ग्रामपंचायत</Link>
             </h1>
@@ -608,23 +608,15 @@ function Header() {
         </>
       )}
 
-      {/* Sidebar */}
-      {/* <div
-        className={`${
-          isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } transition-transform fixed  inset-0  z-10 bg-gray-100 w-64 sm:w-64 lg:float-left lg:translate-x-0`}
-      > */}
+      
       <div
   className={`${
     isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
   } transition-transform fixed inset-0 z-10 lg:mr-14  bg-gray-100 w-64 sm:w-64 lg:float-left lg:translate-x-0 lg:static`}
 >
         {/* Sidebar Content */}
-        <aside>
-          {/* <div className="p-6">
-            <h1 className="text-xl text-blue-500 font-bold">ग्रामपंचायत</h1>
-            <p className="text-sm text-gray-400">आपल्या गावाची समृद्धी आणि विकास</p>
-          </div> */}
+        <aside className="h-full max-h-[70vh] overflow-y-auto">
+         
           <nav className="flex-grow mt-28 lg:mt-auto ">
             <ul className="space-y-4">
               <Link href="/admin/">

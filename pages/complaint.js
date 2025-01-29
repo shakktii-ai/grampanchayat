@@ -18,6 +18,18 @@ function Complaint() {
   const [complaint,setComplaint]=useState('')
   const [complaintImprove,setComplaintImprove]=useState('')
 
+ const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // Fetch the user from localStorage or router query
+    const userFromStorage = JSON.parse(localStorage.getItem('user'));
+    if (userFromStorage) {
+      setUser(userFromStorage);
+    } else if (router.query.user) {
+      setUser(router.query.user);
+    }
+  }, [router.query]); 
+
   const handleChange = (e) => {
       const { name, value } = e.target;
   
@@ -88,7 +100,7 @@ function Complaint() {
                 theme="light"
               />
       <div
-        className="flex items-center justify-center min-h-screen px-4 sm:px-5 mx-2"
+        className="flex items-center justify-center min-h-screen p-4 sm:px-5 mx-2"
       >
         {/* Main Panel */}
         <div className="bg-lime-100 border-2 border-lime-400 shadow-lg p-6 rounded-lg w-full max-w-md lg:max-w-lg">
@@ -108,11 +120,12 @@ function Complaint() {
                 नाव :
               </label>
               <input
+              disabled
                 type="text"
                 name='fullName'
-                value={fullName}
+                value={user?.name || ''}
                 onChange={handleChange}
-                placeholder="पूर्ण नाव"
+                placeholder={user?.name || ''}
                 className="flex-1 px-3 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-lime-500"
               />
             </div>
@@ -123,11 +136,12 @@ function Complaint() {
                 इ-मेल :
               </label>
               <input
+              disabled
                 type="email"
                 name='email'
-                value={email}
+                value={user?.email || ''}
                 onChange={handleChange}
-                placeholder="example@example.com"
+                placeholder={user?.name || ''}
                 className="flex-1 px-3 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-lime-500"
               />
             </div>
@@ -138,12 +152,13 @@ function Complaint() {
                 मोबाईल :
               </label>
               <input
+              disabled
                 type="tel"
                 name='mobileNo'
-                value={mobileNo}
+                value={user?.mobileNo || ''}
                 onChange={handleChange}
-                placeholder="0123456789"
-                className="flex-1 px-3 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-lime-500"
+                placeholder={user?.mobileNo || ''}
+                className="flex-1 px-3 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-lime-500 "
               />
             </div>
 

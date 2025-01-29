@@ -11,11 +11,25 @@ function Birth() {
       router.push("/login");
     }
   }, []);
+  const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    // Fetch the user from localStorage or router query
+    const userFromStorage = JSON.parse(localStorage.getItem('user'));
+    if (userFromStorage) {
+      setUser(userFromStorage);
+    } else if (router.query.user) {
+      setUser(router.query.user);
+    }
+  }, [router.query]); 
+  // console.log(user);
+ 
+  
   const [fullName,setFullName]=useState('')
   const [address,setAddress]=useState('')
   const [mobileNumber,setMobileNumber]=useState('')
   const [email,setEmail]=useState('')
+  const [grampanchyatName,setGrampanchyatName]=useState('')
   const [birthBabyFullName,setBirthBabyFullName]=useState('')
   const [fatherName,setFatherName]=useState('')
   const [motherName,setMotherName]=useState('')
@@ -40,8 +54,6 @@ function Birth() {
 
 
   const handleInputChange = (e) => {
-    
-
     
     if (e.target.name === "fullName") {
       setFullName(e.target.value);
@@ -253,19 +265,23 @@ function Birth() {
 <h1 className='text-2xl text-center m-auto mb-5 text-white font-bold'>जन्म प्रमाणपत्र अर्ज  (Birth Certificate Application Form)</h1>
 <form className="max-w-2xl m-auto " onSubmit={handleSubmit} >
   <div className="relative z-0 mx-10  md:w-full mb-5 group">
-      <input type="text" name="fullName" id="fullName" value={fullName} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder=" " required />
+      <input type="text" name="fullName" id="fullName" value={user?.name || ''} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder={user?.name||''} required />
       <label htmlFor="fullName" className="peer-focus:font-medium absolute text-sm text-white dark:text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">अर्जदाराचे पूर्ण नाव:</label>
   </div>
   <div className="relative z-0 mx-10 md:w-full mb-5 group">
       <input type="text" name="address" id="address" value={address} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder=" " required />
       <label htmlFor="address" className="peer-focus:font-medium absolute text-sm text-white dark:text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">अर्जदाराचा पत्ता:</label>
   </div>
+  <div className="hidden relative z-0 mx-10 md:w-full mb-5 group">
+      <input type="text" name="grampanchyatName" id="address" value={user?.grampanchyatName||''} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder={user?.grampanchyatName||''} required />
+      <label htmlFor="address" className="peer-focus:font-medium absolute text-sm text-white dark:text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">अर्जदाराचा पत्ता:</label>
+  </div>
   <div className="relative z-0 mx-10 md:w-full mb-5 group">
-      <input type="tel" name="mobileNumber" id="mobileNumber" value={mobileNumber} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder=" " required />
+      <input type="tel" name="mobileNumber" id="mobileNumber" value={user?.mobileNo || ''} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder={user?.mobileNo || ''} required />
       <label htmlFor="mobileNumber" className="peer-focus:font-medium absolute text-sm text-white dark:text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">मोबाइल नंबर:</label>
   </div>
   <div className="relative z-0 mx-10 md:w-full mb-5 group">
-        <input type="email" name="email" id="email" value={email} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder=" " required />
+        <input type="email" name="email" id="email" value={user?.email || ''} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder={user?.email || ''} required disabled />
         <label htmlFor="email" className="peer-focus:font-medium absolute text-sm text-white dark:text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">ईमेल आयडी:</label>
     </div>
 

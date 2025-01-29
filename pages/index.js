@@ -105,8 +105,23 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 export default function Home() {
+  const router = useRouter();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // Fetch the user from localStorage or router query
+    const userFromStorage = JSON.parse(localStorage.getItem('user'));
+    if (userFromStorage) {
+      setUser(userFromStorage);
+    } else if (router.query.user) {
+      setUser(router.query.user);
+    }
+  }, [router.query]);
+  // console.log(user);
+  
   return (
     <>
       <Head>

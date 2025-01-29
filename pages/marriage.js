@@ -28,7 +28,7 @@ function Marriage() {
     const [firstWitnessesProof,setFirstWitnessesProof]=useState(null)
     const [secondWitnessesProof,setSecondWitnessesProof]=useState(null)
     const [status,setStatus ]=useState('सुरू केलेले नाही')
-    const [requestType,setRequestType]=useState('उत्पन्न प्रमाणपत्र')
+    const [requestType,setRequestType]=useState('विवाह प्रमाणपत्र')
   
   
     const handleInputChange = (e) => {

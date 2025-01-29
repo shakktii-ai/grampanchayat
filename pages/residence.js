@@ -104,7 +104,7 @@ function Residence() {
           status,
           requestType
         };
-        // console.log("formData in marriage",formData);
+        console.log("formData in marriage",formData);
         const response = await fetch('/api/residence-certificate', {
           method: 'POST',
           headers: {
@@ -140,7 +140,7 @@ toast.success("Your Request Send Successfull", {
            progress: undefined,
            theme: "light",
          });
-          alert('Form submitted successfully');
+          // alert('Form submitted successfully');
         } else {
           alert('Error: ' + result.message);
         }
