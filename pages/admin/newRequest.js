@@ -799,7 +799,7 @@
 // export async function getServerSideProps() {
 //   try {
 //     // Fetch birth certificate data
-//     const birthRes = await fetch('http://localhost:3000/api/birthCertificate');
+//     const birthRes = await fetch('${process.env.NEXT_PUBLIC_HOST}/api/birthCertificate');
 //     if (!birthRes.ok) {
 //       throw new Error(`Failed to fetch birth certificate data. Status: ${birthRes.status}`);
 //     }
@@ -813,7 +813,7 @@
 //     }
 
 //     // Fetch death certificate data
-//     const deathRes = await fetch('http://localhost:3000/api/deathCertificate');
+//     const deathRes = await fetch('${process.env.NEXT_PUBLIC_HOST}/api/deathCertificate');
 //     let deathCertificates = [];
 //     let deathError = null;
 
@@ -1176,7 +1176,7 @@
 //   }
 
 //   try {
-//     const birthRes = await fetch('http://localhost:3000/api/birthCertificate');
+//     const birthRes = await fetch('${process.env.NEXT_PUBLIC_HOST}/api/birthCertificate');
 //     if (!birthRes.ok) {
 //       const errorText = await birthRes.text();  // Capture HTML error response
 //       console.error('Error fetching birth certificate data:', errorText);
@@ -1185,7 +1185,7 @@
 //     const birthData = await birthRes.json();
 //     const birthCertificates = birthData.data || [];
 
-//     const deathRes = await fetch('http://localhost:3000/api/death-certificate');
+//     const deathRes = await fetch('${process.env.NEXT_PUBLIC_HOST}/api/death-certificate');
 //     if (!deathRes.ok) {
 //       const errorText = await deathRes.text();
 //       console.error('Error fetching death certificate data:', errorText);
@@ -1533,7 +1533,7 @@
 //   }
 
 //   try {
-//     const birthRes = await fetch('http://localhost:3000/api/birthCertificate');
+//     const birthRes = await fetch('${process.env.NEXT_PUBLIC_HOST}/api/birthCertificate');
 //     if (!birthRes.ok) {
 //       const errorText = await birthRes.text();  // Capture HTML error response
 //       console.error('Error fetching birth certificate data:', errorText);
@@ -1542,7 +1542,7 @@
 //     const birthData = await birthRes.json();
 //     const birthCertificates = birthData.data || [];
 
-//     const deathRes = await fetch('http://localhost:3000/api/death-certificate');
+//     const deathRes = await fetch('${process.env.NEXT_PUBLIC_HOST}/api/death-certificate');
 //     if (!deathRes.ok) {
 //       const errorText = await deathRes.text();
 //       console.error('Error fetching death certificate data:', errorText);
@@ -1960,7 +1960,7 @@
 //   }
 
 //   try {
-//     const birthRes = await fetch('http://localhost:3000/api/birthCertificate');
+//     const birthRes = await fetch('${process.env.NEXT_PUBLIC_HOST}/api/birthCertificate');
 //     if (!birthRes.ok) {
 //       const errorText = await birthRes.text();  // Capture HTML error response
 //       console.error('Error fetching birth certificate data:', errorText);
@@ -1969,7 +1969,7 @@
 //     const birthData = await birthRes.json();
 //     const birthCertificates = birthData.data || [];
 
-//     const deathRes = await fetch('http://localhost:3000/api/death-certificate');
+//     const deathRes = await fetch('${process.env.NEXT_PUBLIC_HOST}/api/death-certificate');
 //     if (!deathRes.ok) {
 //       const errorText = await deathRes.text();  // Capture HTML error response
 //       console.error('Error fetching death certificate data:', errorText);
@@ -1978,7 +1978,7 @@
 //     const deathData = await deathRes.json();
 //     const deathCertificates = deathData.data || [];
 
-//     const marriageRes = await fetch('http://localhost:3000/api/marriage-certificate');
+//     const marriageRes = await fetch('${process.env.NEXT_PUBLIC_HOST}/api/marriage-certificate');
 //     // console.log(marriageRes);
 
 //     if (!marriageRes.ok) {
@@ -2197,7 +2197,7 @@ const NewRequest = ({
     if (!selectedCertificate) return;
   
     try {
-      const response = await fetch(`/api/certificates?type=${selectedType}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/certificates?type=${selectedType}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -2829,7 +2829,7 @@ export async function getServerSideProps() {
   }
 
   try {
-    const birthRes = await fetch('http://localhost:3000/api/birthCertificate');
+    const birthRes = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/birthCertificate`);
     if (!birthRes.ok) {
       const errorText = await birthRes.text();  // Capture HTML error response
       console.error('Error fetching birth certificate data:', errorText);
@@ -2838,7 +2838,7 @@ export async function getServerSideProps() {
     const birthData = await birthRes.json();
     const birthCertificates = birthData.data || [];
 
-    const deathRes = await fetch('http://localhost:3000/api/death-certificate');
+    const deathRes = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/death-certificate`);
     if (!deathRes.ok) {
       const errorText = await deathRes.text();
       console.error('Error fetching death certificate data:', errorText);
@@ -2847,7 +2847,7 @@ export async function getServerSideProps() {
     const deathData = await deathRes.json();
     const deathCertificates = deathData.data || [];
 
-    const marriageRes = await fetch('http://localhost:3000/api/marriage-certificate');
+    const marriageRes = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/marriage-certificate`);
     if (!marriageRes.ok) {
       const errorText = await marriageRes.text();
       console.error('Error fetching marriage certificate data:', errorText);
@@ -2856,7 +2856,7 @@ export async function getServerSideProps() {
     const marriageData = await marriageRes.json();
     const marriageCertificates = marriageData.data || [];
 
-    const residentRes = await fetch('http://localhost:3000/api/residence-certificate');
+    const residentRes = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/residence-certificate`);
     if (!residentRes.ok) {
       const errorText = await residentRes.text();
       console.error('Error fetching resident certificate data:', errorText);
