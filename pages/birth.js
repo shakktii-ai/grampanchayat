@@ -14,16 +14,25 @@ function Birth() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // Fetch the user from localStorage or router query
-    const userFromStorage = JSON.parse(localStorage.getItem('user'));
-    if (userFromStorage) {
-      setUser(userFromStorage);
-    } else if (router.query.user) {
-      setUser(router.query.user);
+    if (!localStorage.getItem("token")) {
+      router.push("/login");
+    } else {
+      const userFromStorage = JSON.parse(localStorage.getItem('user'));
+      if (userFromStorage) {
+        setUser(userFromStorage);
+      }
     }
-  }, [router.query]); 
+  }, []);
   // console.log(user);
- 
+  useEffect(() => {
+    if (user) {
+      setFullName(user.name || '');
+      setMobileNumber(user.mobileNo || '');
+      setEmail(user.email || '');
+      
+      // Set other initial states from user if necessary...
+    }
+  }, [user]);
   
   const [fullName,setFullName]=useState('')
   const [address,setAddress]=useState('')
@@ -51,18 +60,19 @@ function Birth() {
   const [signature,setSignature]=useState(null)
   const [status,setStatus ]=useState('सुरू केलेले नाही')
   const [requestType,setRequestType]=useState('जन्म प्रमाणपत्र')
-
+  const[grampanchayantUploadDocument,setGrampanchayantUploadDocument]=useState('')
+const[result,setResult]=useState('')
 
   const handleInputChange = (e) => {
-    
-    if (e.target.name === "fullName") {
-      setFullName(e.target.value);
-    } else if (e.target.name == "address") {
-      setAddress(e.target.value);
-    } else if (e.target.name == "mobileNumber") {
-      setMobileNumber(e.target.value);
-    } else if (e.target.name == "email") {  
-      setEmail(e.target.value);
+    const { name, value } = e.target;
+    if (name === "fullName") {
+      setFullName(user?.name||value);
+    } else if (name === "mobileNumber") {
+      setMobileNumber(value);
+    } else if (name === "address") {
+      setAddress(value);
+    } else if (name === "email") {
+      setEmail(value);
     } else if (e.target.name == "birthBabyFullName") {
       setBirthBabyFullName(e.target.value);
     } else if (e.target.name == "fatherName") {
@@ -142,27 +152,6 @@ function Birth() {
   };
 
 
-
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-    
-  //   const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/birthCertificate`, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(formData),
-  //   });
-  //   // let response = await res.json();
-  //   let result = await response.json();
-  //   if (response.ok) {
-  //     alert('Form submitted successfully');
-  //   } else {
-  //     alert('Error: ' + result.message);
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(phone,age, name, email, massage)
@@ -190,7 +179,10 @@ function Birth() {
       other,
       signature,
       status,
-      requestType };
+      requestType,
+      grampanchayantUploadDocument,
+     };
+console.log(data);
 
     let res = await fetch(
       `${process.env.NEXT_PUBLIC_HOST}/api/birthCertificate`,
@@ -203,9 +195,9 @@ function Birth() {
       }
     );
     let response = await res.json();
-    // console.log(response);
+    console.log(response);
 
-    // console.log("Success:", data);
+    console.log("Success:", data);
     setFullName("");
     setAddress("");
     setMobileNumber("");
@@ -244,7 +236,7 @@ function Birth() {
       theme: "light",
     });
   }else {
-    alert('Error: ' + result.message);
+    alert('Error: ' + message);
   }
   };
   return (
@@ -265,23 +257,23 @@ function Birth() {
 <h1 className='text-2xl text-center m-auto mb-5 text-white font-bold'>जन्म प्रमाणपत्र अर्ज  (Birth Certificate Application Form)</h1>
 <form className="max-w-2xl m-auto " onSubmit={handleSubmit} >
   <div className="relative z-0 mx-10  md:w-full mb-5 group">
-      <input type="text" name="fullName" id="fullName" value={user?.name || ''} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder={user?.name||''} required />
+      <input type="text" name="fullName" id="fullName" value={user?.name || fullName} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder={user?.name||''} required />
       <label htmlFor="fullName" className="peer-focus:font-medium absolute text-sm text-white dark:text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">अर्जदाराचे पूर्ण नाव:</label>
   </div>
   <div className="relative z-0 mx-10 md:w-full mb-5 group">
-      <input type="text" name="address" id="address" value={address} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder=" " required />
+      <input type="text" name="address" id="address" value={address} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder=" " required  />
       <label htmlFor="address" className="peer-focus:font-medium absolute text-sm text-white dark:text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">अर्जदाराचा पत्ता:</label>
   </div>
   <div className="hidden relative z-0 mx-10 md:w-full mb-5 group">
-      <input type="text" name="grampanchyatName" id="address" value={user?.grampanchyatName||''} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder={user?.grampanchyatName||''} required />
+      <input type="text" name="grampanchyatName" id="address" value={user?.grampanchyatName||grampanchyatName} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder={user?.grampanchyatName||''} required  />
       <label htmlFor="address" className="peer-focus:font-medium absolute text-sm text-white dark:text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">अर्जदाराचा पत्ता:</label>
   </div>
   <div className="relative z-0 mx-10 md:w-full mb-5 group">
-      <input type="tel" name="mobileNumber" id="mobileNumber" value={user?.mobileNo || ''} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder={user?.mobileNo || ''} required />
+      <input type="tel" name="mobileNumber" id="mobileNumber" value={user?.mobileNo || mobileNumber} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder={user?.mobileNo || ''} required readOnly />
       <label htmlFor="mobileNumber" className="peer-focus:font-medium absolute text-sm text-white dark:text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">मोबाइल नंबर:</label>
   </div>
   <div className="relative z-0 mx-10 md:w-full mb-5 group">
-        <input type="email" name="email" id="email" value={user?.email || ''} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder={user?.email || ''} required disabled />
+        <input type="email" name="email" id="email" value={user?.email || email} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder={user?.email || ''} required readOnly />
         <label htmlFor="email" className="peer-focus:font-medium absolute text-sm text-white dark:text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">ईमेल आयडी:</label>
     </div>
 
@@ -366,7 +358,7 @@ function Birth() {
         className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer"
         required
     >
-        <option value="" disabled selected>
+        <option value="" readOnly selected>
         लिंग:
         </option>
         <option className='text-black bg-' value="पुरुष">पुरुष</option>

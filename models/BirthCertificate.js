@@ -26,6 +26,7 @@ const BirthCertificateSchema = new mongoose.Schema({
     signature: { type: String },    
   status: { type: String, default: 'सुरू केलेले नाही'},
   requestType: { type: String, default: 'जन्म प्रमाणपत्र' },
+  grampanchayantUploadDocument:{type:String}
 }, { timestamps: true });
 
 export default mongoose.models.BirthCertificate || mongoose.model('BirthCertificate', BirthCertificateSchema);

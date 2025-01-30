@@ -11,6 +11,7 @@ const HouseAndWaterTaxSchema = new mongoose.Schema({
     addressProof: { type: String, required: true },
     status: { type: String, default: 'सुरू केलेले नाही'},
     requestType: { type: String, default: 'रहिवासी प्रमाणपत्र' },
+    grampanchayantUploadDocument:{type:String}
 }, { timestamps: true });
 
 export default mongoose.models.HouseAndWaterTax || mongoose.model('HouseAndWaterTax', HouseAndWaterTaxSchema);

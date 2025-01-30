@@ -11,6 +11,28 @@ function RoadRepair() {
         router.push("/login");
       }
     }, []);
+    const [user, setUser] = useState(null);
+    
+      useEffect(() => {
+        if (!localStorage.getItem("token")) {
+          router.push("/login");
+        } else {
+          const userFromStorage = JSON.parse(localStorage.getItem('user'));
+          if (userFromStorage) {
+            setUser(userFromStorage);
+          }
+        }
+      }, []);
+      // console.log(user);
+      useEffect(() => {
+        if (user) {
+          setFullName(user.name || '');
+          setMobileNumber(user.mobileNo || '');
+          setEmail(user.email || '');
+          
+          // Set other initial states from user if necessary...
+        }
+      }, [user]);
   const [fullName, setFullName] = useState('');
   const [address, setAddress] = useState('');
   const [mobileNumber, setMobileNumber] = useState('');
@@ -161,19 +183,19 @@ function RoadRepair() {
     <h1 className='text-xl text-center m-auto mb-5 text-white font-bold'>अर्जदाराची माहिती</h1>
 <form className="max-w-2xl m-auto " onSubmit={handleSubmit} >
 <div className="relative z-0 mx-10  md:w-full mb-5 group">
-      <input type="text" name="fullName" id="fullName" value={fullName} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder=" " required />
+      <input type="text" name="fullName" id="fullName" value={fullName} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder=" " required readOnly/>
       <label htmlFor="fullName" className="peer-focus:font-medium absolute text-sm text-white dark:text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">अर्जदाराचे पूर्ण नाव:</label>
   </div>
   <div className="relative z-0 mx-10 md:w-full mb-5 group">
-      <input type="text" name="address" id="address" value={address} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder=" " required />
+      <input type="text" name="address" id="address" value={address} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder=" " required  />
       <label htmlFor="address" className="peer-focus:font-medium absolute text-sm text-white dark:text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">अर्जदाराचा पत्ता:</label>
   </div>
   <div className="relative z-0 mx-10 md:w-full mb-5 group">
-      <input type="tel" name="mobileNumber" id="mobileNumber" value={mobileNumber} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder=" " required />
+      <input type="tel" name="mobileNumber" id="mobileNumber" value={mobileNumber} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder=" " required readOnly />
       <label htmlFor="mobileNumber" className="peer-focus:font-medium absolute text-sm text-white dark:text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">मोबाइल नंबर:</label>
   </div>
   <div className="relative z-0 mx-10 md:w-full mb-5 group">
-        <input type="email" name="email" id="email" value={email} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder=" "  />
+        <input type="email" name="email" id="email" value={email} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder=" " readOnly />
         <label htmlFor="email" className="peer-focus:font-medium absolute text-sm text-white dark:text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">ईमेल आयडी (असल्यास):</label>
     </div>
     <h1 className='text-xl text-center m-auto mb-5 text-white font-bold'>रस्त्याबाबतची माहिती</h1>

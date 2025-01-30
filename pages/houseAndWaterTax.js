@@ -11,6 +11,7 @@ function HouseAndWaterTax() {
         router.push("/login");
       }
     }, []);
+    
      const [fullName, setFullName] = useState('');
       const [fatherOrWifeFullName, setFatherOrWifeFullName] = useState('');
       const [dateOfBirth, setDateOfBirth] = useState('');

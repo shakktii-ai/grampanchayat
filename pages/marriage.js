@@ -11,6 +11,28 @@ function Marriage() {
         router.push("/login");
       }
     }, []);
+
+    const [user, setUser] = useState(null);
+    
+      useEffect(() => {
+        if (!localStorage.getItem("token")) {
+          router.push("/login");
+        } else {
+          const userFromStorage = JSON.parse(localStorage.getItem('user'));
+          if (userFromStorage) {
+            setUser(userFromStorage);
+          }
+        }
+      }, []);
+      // console.log(user);
+      useEffect(() => {
+        if (user) {
+          
+          setEmail(user.email || '');
+          
+          // Set other initial states from user if necessary...
+        }
+      }, [user]);
     const [husbandFullName,setHusbandFullName]=useState('')
     const [wifeFullName,setWifeFullName]=useState('')
     const [husbandDateOfBirth,setHusbandDateOfBirth]=useState('')
@@ -257,7 +279,7 @@ function Marriage() {
         <label htmlFor="wifeContactNumber" className="peer-focus:font-medium absolute text-sm text-white dark:text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">पत्नीचा संपर्क क्रमांक:</label>
     </div>
   <div className="relative z-0 mx-10 md:w-full mb-5 group">
-        <input type="email" name="email" id="email" value={email} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder=" "  />
+        <input type="email" name="email" id="email" value={email} onChange={handleInputChange} className="block py-2.5 px-0 w-full text-sm text-white bg-transparent border-0 border-b-2 border-white appearance-none dark:text-white dark:border-white dark:focus:border-white focus:outline-none focus:ring-0 focus:border-white peer" placeholder=" " readOnly />
         <label htmlFor="email" className="peer-focus:font-medium absolute text-sm text-white dark:text-white duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">ई-मेल पत्ता:</label>
     </div>
     

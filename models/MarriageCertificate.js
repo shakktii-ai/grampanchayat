@@ -19,6 +19,7 @@ const MarriageCertificateSchema = new mongoose.Schema({
     secondWitnessesProof: { type: String,  },  
     status: { type: String, default: 'सुरू केलेले नाही'},
     requestType: { type: String, default: 'विवाह प्रमाणपत्र' },
+    grampanchayantUploadDocument:{type:String}
 }, { timestamps: true });
 
 export default mongoose.models.MarriageCertificate || mongoose.model('MarriageCertificate', MarriageCertificateSchema);

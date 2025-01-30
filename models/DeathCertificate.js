@@ -16,6 +16,7 @@ const DeathCertificateSchema = new mongoose.Schema({
     other: { type: String, required: true }, 
     status: { type: String, default: 'सुरू केलेले नाही'},
     requestType: { type: String, default: 'मृत्यू प्रमाणपत्र' },
+    grampanchayantUploadDocument:{type:String}
 }, { timestamps: true });
 
 export default mongoose.models.DeathCertificate || mongoose.model('DeathCertificate', DeathCertificateSchema);

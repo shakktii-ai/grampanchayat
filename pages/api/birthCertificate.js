@@ -33,7 +33,8 @@ const handler = async (req, res) => {
         other,
         signature,
         status,
-        requestType
+        requestType,
+        grampanchayantUploadDocument,
       } = req.body;
 
       // Create a new birth certificate instance with the received data
@@ -62,7 +63,8 @@ const handler = async (req, res) => {
         other,
         signature,
         status,
-        requestType
+        requestType,
+        grampanchayantUploadDocument,
       });
 
       // Save the birth certificate to the database
@@ -83,8 +85,7 @@ const handler = async (req, res) => {
 
       // Fetch birth certificates with pagination
       const birthCertificates = await BirthCertificatee.find()
-        .skip(skip)
-        .limit(limit);
+        
 
       // Get total count of documents
       const totalCount = await BirthCertificatee.countDocuments();
