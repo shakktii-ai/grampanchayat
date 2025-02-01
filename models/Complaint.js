@@ -8,8 +8,12 @@ const ComplaintSchema = new Schema({
   fullName: { type: String, required: true },
   email: { type: String, required: true },
   mobileNo: { type: String, required: true },
+  grampanchyatName: {type:String , required:true },
   complaint: { type: String, required: true },
   complaintImprove: { type: String, required: true },
+  status: { type: String  },
+  
+  
 });
 
 let cached = global.mongoose;

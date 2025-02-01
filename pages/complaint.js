@@ -17,38 +17,53 @@ function Complaint() {
   const [mobileNo,setMobileNo]=useState('')
   const [complaint,setComplaint]=useState('')
   const [complaintImprove,setComplaintImprove]=useState('')
+  const[grampanchyatName,setGrampanchyatName]=useState('')
 
  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // Fetch the user from localStorage or router query
-    const userFromStorage = JSON.parse(localStorage.getItem('user'));
-    if (userFromStorage) {
-      setUser(userFromStorage);
-    } else if (router.query.user) {
-      setUser(router.query.user);
-    }
-  }, [router.query]); 
+      if (!localStorage.getItem("token")) {
+        router.push("/login");
+      } else {
+        const userFromStorage = JSON.parse(localStorage.getItem('user'));
+        if (userFromStorage) {
+          setUser(userFromStorage);
+        }
+      }
+    }, []);
+    // console.log(user);
+    useEffect(() => {
+      if (user) {
+        setFullName(user.name || '');
+        setMobileNo(user.mobileNo || '');
+        setEmail(user.email || '');
+        setGrampanchyatName(user.grampanchyatName || '');
+        // Set other initial states from user if necessary...
+      }
+    }, [user]); 
 
   const handleChange = (e) => {
       const { name, value } = e.target;
   
       if (e.target.name == "fullName") {
-        setFullName(e.target.value);
+        setFullName(user?.name||e.target.value);
       } else if (e.target.name == "email") {
-        setEmail(e.target.value);
+        setEmail(user?.email||e.target.value);
       } else if (e.target.name == "mobileNo") {
-        setMobileNo(e.target.value);
+        setMobileNo(user?.mobileNo||e.target.value);
       } else if (e.target.name == "complaint") {
           setComplaint(e.target.value);
       } else if (e.target.name == "complaintImprove") {
           setComplaintImprove(e.target.value);
+      
+      } else if (e.target.name == "grampanchyatName") {
+          setGrampanchyatName(user?.grampanchyatName||e.target.value);
       } 
   }
     // Handle form submission
     const handleSubmit = async (event) => {
       event.preventDefault();
-      const formData = {fullName,email,mobileNo,complaint,complaintImprove};
+      const formData = {fullName,email,mobileNo,grampanchyatName,complaint,complaintImprove};
       console.log('Form submitted:', formData);
       try {
           const response = await fetch('/api/complaint', {
@@ -60,9 +75,7 @@ function Complaint() {
           });
     
           const data = await response.json();
-          setFullName('')
-          setEmail('')
-          setMobileNo('')
+          
           setComplaint('')
           setComplaintImprove('')
   
@@ -123,12 +136,27 @@ function Complaint() {
               disabled
                 type="text"
                 name='fullName'
-                value={user?.name || ''}
+                value={user?.name || fullName}
                 onChange={handleChange}
                 placeholder={user?.name || ''}
                 className="flex-1 px-3 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-lime-500"
               />
             </div>
+            <div className="hidden flex-col sm:flex-row sm:items-center sm:space-x-4">
+              <label className="w-full sm:w-24 font-medium text-gray-800">
+                नाव :
+              </label>
+              <input
+              disabled
+                type="text"
+                name='grampanchyatName'
+                value={user?.grampanchyatName || ''}
+                onChange={handleChange}
+                placeholder={user?.grampanchyatName || ''}
+                className="flex-1 px-3 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-lime-500"
+              />
+            </div>
+            
 
             {/* Email Input */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4">

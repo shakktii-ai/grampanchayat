@@ -631,6 +631,24 @@ function Header() {
                   <span className="ml-3">नवीन विनंती</span>
                 </li>
               </Link>
+              <Link href="/admin/verifyRequest">
+                <li className="px-6 py-3 hover:bg-gray-700 cursor-pointer flex items-center">
+                  <span>📝</span>
+                  <span className="ml-3"> प्रमाणपत्र अपलोड करा</span>
+                </li>
+              </Link>
+              <Link href="/admin/completeRequest">
+                <li className="px-6 py-3 hover:bg-gray-700 cursor-pointer flex items-center">
+                  <span>📝</span>
+                  <span className="ml-3"> विनंती पूर्ण झालेले बघा </span>
+                </li>
+              </Link>
+              <Link href="/admin/complaint">
+                <li className="px-6 py-3 hover:bg-gray-700 cursor-pointer flex items-center">
+                  <span>📝</span>
+                  <span className="ml-3"> तक्रार यादी </span>
+                </li>
+              </Link>
               <Link href="/admin/tharavPost">
                 <li className="px-6 py-3 hover:bg-gray-700 cursor-pointer flex items-center">
                   <span>📝</span>

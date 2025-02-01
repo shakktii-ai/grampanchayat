@@ -14,15 +14,18 @@ export default async function handler(req, res) {
         email,
         mobileNo,
         complaint,
-        complaintImprove
+        complaintImprove,
+        grampanchyatName
       } = req.body;
+console.log(req.body);
 
       const newTharavPost = new TharavPost({
         fullName,
         email,
         mobileNo,
         complaint,
-        complaintImprove
+        complaintImprove,
+        grampanchyatName,
       });
 
       await newTharavPost.save();

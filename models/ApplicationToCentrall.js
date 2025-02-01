@@ -11,7 +11,7 @@ const ApplicationToCentralSchema = new mongoose.Schema({
             subject: {type :String , required:true },
             date: {type :String , required:true },
             document: {type :String , required:true },
-    
+            
   },{timestamps:true});
 
 
