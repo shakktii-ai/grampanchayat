@@ -85,9 +85,9 @@ const SuperNavbar = ({ Logout, user }) => {
           {/* Dropdown Menu */}
           <div className="absolute top-full left-0 w-full bg-white shadow-md rounded-md p-4 z-50">
             <Link href="/superAdmin" className="block text-black hover:text-gray-700 mb-2">मुख्य पृष्ठ</Link>
-            <Link href="/superAdmin/complaint" className="block text-black hover:text-gray-700 mb-2">तक्रार</Link>
-            <Link href="/superAdmin/tharavPost" className="block text-black hover:text-gray-700 mb-2">ठराव</Link>
-            <Link href="/superAdmin/developmentwork" className="block text-black hover:text-gray-700 mb-2">विकास कार्य</Link>
+            {/* <Link href="/superAdmin/complaint" className="block text-black hover:text-gray-700 mb-2">तक्रार</Link> */}
+            {/* <Link href="/superAdmin/tharavPost" className="block text-black hover:text-gray-700 mb-2">ठराव</Link> */}
+            {/* <Link href="/superAdmin/developmentwork" className="block text-black hover:text-gray-700 mb-2">विकास कार्य</Link> */}
 
             {/* Mobile Search Bar */}
             <div className="relative">
